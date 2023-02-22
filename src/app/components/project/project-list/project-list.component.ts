@@ -1,0 +1,52 @@
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { Project } from 'src/app/common/project';
+import { ProjectService } from 'src/app/services/project.service';
+
+@Component({
+  selector: 'app-project-list',
+  templateUrl: './project-list.component.html',
+  styleUrls: ['./project-list.component.css']
+})
+export class ProjectListComponent implements OnInit{
+
+  projects : Project[] = [];
+  id !: number;
+  constructor(
+    private projectService : ProjectService,
+    private toastr: ToastrService,
+    private location: Location)
+  {}
+
+  ngOnInit(): void {
+    this.listProjects();
+  }
+
+  setIdForModel(id : number){
+    this.id = id;
+  }
+
+  listProjects(){
+    this.projectService.getAllProjects().subscribe(
+      data => {
+        this.projects = data;
+      }
+    );
+  }
+
+  deleteProject(){
+    this.projectService.deleteProject(this.id).subscribe(
+      data => {
+          this.toastr.success("Project with ID = " + this.id + " Deleted Successfully");
+          this.location.go(this.location.path());
+          window.location.reload();
+      },
+      error => {
+        console.log(error.message());
+      }
+    )
+  }
+
+
+}

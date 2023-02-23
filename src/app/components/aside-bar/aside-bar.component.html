@@ -57,6 +57,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a *ngIf="roleMatching(['ROLE_ADMIN'])" routerLink="/patient" class="nav-link">
+              <i class="nav-icon fas fa-heartbeat"></i>
+              <p>
+                Manage Patients
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>

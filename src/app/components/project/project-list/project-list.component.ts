@@ -48,5 +48,14 @@ export class ProjectListComponent implements OnInit{
     )
   }
 
+  calculateProgress(estimated : number, achieved : number) : number{
+    
+    const progression = (achieved - 0) / (estimated - 100);
+    const percentageProgression = progression * 100;
 
+    if(percentageProgression > 100){
+      return 100;
+    }
+    return Math.floor(percentageProgression);
+  }
 }

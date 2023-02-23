@@ -7,4 +7,6 @@ export class Project {
     duration! : string;
     estimatedBudget! : number;
     totalAmountSpent! : number;
+    createdAt!: Date;
+    progression! : number;
 }

@@ -61,13 +61,13 @@ export class ProjectAddComponent {
     });
   }
   settingFields(p: Project) {
-    this.inputName?.setValue(this.projectToUpdate.projectName);
-    this.inputDescription?.setValue(this.projectToUpdate.projectDescription);
-    this.inputStatus?.setValue(this.projectToUpdate.projectStatus);
-    this.inputProjectLeader?.setValue(this.projectToUpdate.projectLeader);
-    this.inputEstimatedBudget?.setValue(this.projectToUpdate.estimatedBudget);
-    this.inputSpentBudget?.setValue(this.projectToUpdate.totalAmountSpent);
-    this.inputEstimatedDuration?.setValue(this.projectToUpdate.duration);
+    this.inputName?.setValue(p.projectName);
+    this.inputDescription?.setValue(p.projectDescription);
+    this.inputStatus?.setValue(p.projectStatus);
+    this.inputProjectLeader?.setValue(p.projectLeader);
+    this.inputEstimatedBudget?.setValue(p.estimatedBudget);
+    this.inputSpentBudget?.setValue(p.totalAmountSpent);
+    this.inputEstimatedDuration?.setValue(p.duration);
   }
   //GETTERS
   get inputName() { return this.projectFromGroup.get('projectInfo.inputName'); }

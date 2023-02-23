@@ -22,12 +22,21 @@ import { UserService } from './services/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectDetailComponent } from './components/project/project-detail/project-detail.component';
+import { PatientUpsertComponent } from './components/patient/patient-upsert/patient-upsert.component';
+import { PatientListComponent } from './components/patient/patient-list/patient-list.component';
 
 const routes: Routes = [
+  //PATIENT
+  { path: 'patient/upsert/:id', component: PatientUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  { path: 'patient/upsert', component: PatientUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  { path: 'patient', component: PatientListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+
+  //PROJECT
   { path: 'project/upsert', component: ProjectAddComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
   { path: 'project/upsert/:id', component: ProjectAddComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
   { path: 'project/detail', component: ProjectDetailComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
   { path: 'project', component: ProjectListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forbidden', component: ForbiddenComponent },
@@ -50,7 +59,9 @@ const routes: Routes = [
     UserRegisterComponent,
     ProjectAddComponent,
     ProjectListComponent,
-    ProjectDetailComponent],
+    ProjectDetailComponent,
+    PatientUpsertComponent,
+    PatientListComponent],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,

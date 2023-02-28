@@ -1,0 +1,94 @@
+<div class="col">
+    <!-- general form elements -->
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Quick Example</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+            <div formGroupName="userInfo">
+                <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input formControlName="inputFirstName" type="text" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Enter First Name">
+                            </div>
+
+                            <div class="form-group">
+                                <label >Last Name</label>
+                                <input formControlName="inputLastName" type="text" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Enter Last Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label >Phone Number</label>
+                                <input formControlName="inputPhone" type="text" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Enter Phone">
+                            </div>
+                            <div class="form-group">
+                                <label >Address</label>
+                                <input formControlName="inputAddress" type="text" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Enter Address">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                <input formControlName="inputEmail" type="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div *ngIf="btnValue == 'Add User'">
+                                <label>Password</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    </div>
+                                    <input formControlName="inputPassword" type="text" class="form-control" placeholder="password">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Role(s)</label>
+                                <select2 
+                                formControlName="inputRole"
+                                [(ngModel)]="selectedValues"
+                                [overlay]="false"
+                                [data]="data" 
+                                [multiple]="true" 
+                                (update)="update('value1', $event)"
+                                (change)="change('change1', $event)" (search)="search('search1')" 
+                                resettable
+                                id="selec2-1">
+                                </select2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+            </div>
+            
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">{{btnValue}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.card -->
+
+</div>

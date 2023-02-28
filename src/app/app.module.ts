@@ -10,7 +10,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
-import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProjectAddComponent } from './components/project/project-add/project-add.component';
@@ -24,6 +23,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProjectDetailComponent } from './components/project/project-detail/project-detail.component';
 import { PatientUpsertComponent } from './components/patient/patient-upsert/patient-upsert.component';
 import { PatientListComponent } from './components/patient/patient-list/patient-list.component';
+import { UserUpsertComponent } from './components/user/user-upsert/user-upsert.component';
+import { UserListComponent } from './components/user/user-list/user-list.component';
+
+//select2
+import { Select2Module } from 'ng-select2-component';
+
 
 const routes: Routes = [
   //PATIENT
@@ -40,7 +45,12 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forbidden', component: ForbiddenComponent },
-  { path: 'userRegister', component: UserRegisterComponent },
+
+  //USER
+  { path: 'user/upsert', component: UserUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  { path: 'user/upsert/:id', component: UserUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  { path: 'user', component: UserListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } //** else of all routes (we can add 404 not found component
 ]
@@ -56,13 +66,17 @@ const routes: Routes = [
     DashboardComponent,
     LoginComponent,
     ForbiddenComponent,
-    UserRegisterComponent,
     ProjectAddComponent,
     ProjectListComponent,
     ProjectDetailComponent,
     PatientUpsertComponent,
-    PatientListComponent],
+    PatientListComponent,
+    UserUpsertComponent,
+    UserListComponent
+  ],
+
   imports: [
+    Select2Module,
     RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,

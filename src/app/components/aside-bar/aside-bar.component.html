@@ -65,6 +65,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a *ngIf="roleMatching(['ROLE_ADMIN'])" routerLink="/user" class="nav-link">
+              <i class="nav-icon fas fa-user-friends"></i>
+              <p>
+                Manage Users
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>

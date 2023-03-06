@@ -20,12 +20,12 @@ export class UserUpsertComponent implements OnInit {
   roles: Role[] = [];
   converted: any[] = [];
   data: any[] = [];
-  selectedValues: any[]=[];
+  selectedRoles: any[]=[];
 
   userFormGroup!: FormGroup;
   userToUpdate: User = new User();
   btnValue = 'Add User';
-  emailId !: string;
+  userUid !: string;
 
   constructor(
     private roleService: RoleService,
@@ -46,11 +46,10 @@ export class UserUpsertComponent implements OnInit {
 
   initUserToUpdate() {
     if (this.route.snapshot.paramMap.has('id')) {
-      this.emailId = this.route.snapshot.paramMap.get('id')!;
-      this.userService.getUser(this.emailId).subscribe(
+      this.userUid = this.route.snapshot.paramMap.get('id')!;
+      this.userService.getUser(this.userUid).subscribe(
         data => {
           this.userToUpdate = data;
-          console.log(this.userToUpdate);
           this.settingFields(this.userToUpdate);
         }
       );
@@ -63,14 +62,14 @@ export class UserUpsertComponent implements OnInit {
       data => {
         this.roles = data;
 
-        //this will map : 
+        //this will map :
         // roleName => value
         // roleDescription => label
         this.converted = this.roles.map(option => ({
           value: option.roleName,
           label: option.roleDescription
         }));
-        
+
         //this will set the array "data" to pass it to html <ngselect [data]="data">
         this.data = [{
           label: "Roles",
@@ -83,7 +82,7 @@ export class UserUpsertComponent implements OnInit {
   formGroupInit() {
     this.userFormGroup = this.formBuilder.group({
       userInfo: this.formBuilder.group({
-        inputEmail: new FormControl('', [Validators.required]),
+        inputEmail: new FormControl('', [Validators.required, Validators.email]),
         inputFirstName: new FormControl('', [Validators.required]),
         inputLastName: new FormControl('', [Validators.required]),
         inputPassword: new FormControl('', [Validators.required]),
@@ -98,14 +97,12 @@ export class UserUpsertComponent implements OnInit {
     this.inputEmail?.setValue(u.userEmail);
     this.inputFirstName?.setValue(u.userFirstName);
     this.inputLastName?.setValue(u.userLastName);
-    //this.inputPassword?.setValue(u.userPassword);
     this.inputPhone?.setValue(u.phone);
     this.inputAddress?.setValue(u.address);
-    //this.inputRole?.setValue(u.roles);
     u.roles.forEach(element => {
-      this.selectedValues.push(element.roleName);
+      this.selectedRoles.push(element.roleName);
     });
-    this.inputRole?.setValue(this.selectedValues);
+    this.inputRole?.setValue(this.selectedRoles);
   }
 
   get inputEmail() { return this.userFormGroup.get('userInfo.inputEmail'); }
@@ -143,55 +140,28 @@ export class UserUpsertComponent implements OnInit {
 
   upsertUser() {
     let u = new User();
-    u.userEmail = this.inputEmail?.value;
-    
     u.userFirstName = this.inputFirstName?.value;
     u.userLastName = this.inputLastName?.value;
     u.phone = this.inputPhone?.value;
     u.address = this.inputAddress?.value;
-    // let r : Role[] = [];
-    
-    // this.inputRole?.value.forEach(element => {
-    //   let r1 = new Role();
-    //   r1.roleName = element;
-    //   r.push(r1);
-    // });
-    
-    // console.log("selectedValues = " + this.selectedValues);
-    // const array : Role [] = [];
-    // this.selectedValues.forEach(element => {
-    //   array.push({roleName : JSON.stringify(element), roleDescription :''})
-    // });
 
-    // console.log("array = "+ array);
+    //you have to initilize roles before pushing inside the array because you will have error :
+    //u.roles is undefined
+    u.roles = [];
+    this.selectedRoles.forEach(element => {
+      u.roles.push({
+        roleName : element,
+        roleDescription : ''
+      })
+    });
 
-
-    let r = new Role();
-    r.roleName = "ROLE_ADMIN";
-    const arr  : any [] = [] ;
-    arr.push(r);
-
-    u.roles = arr;
-
-    const newUser: User = {
-      userEmail: "testing@gmail.com",
-      userFirstName: '',
-      userLastName: '',
-      userPassword: '',
-      phone: '',
-      address: '',
-      active: false,
-      roles: [{
-        roleName: 'ROLE_ADMIN',
-        roleDescription: ''
-      }],
-    };
 
     //add
     if (this.btnValue == 'Add User') {
+      u.userEmail = this.inputEmail?.value;
       u.userPassword = this.inputPassword?.value;
-      console.log(newUser);
-      this.userService.addUser(newUser).subscribe(
+      console.log(+ JSON.stringify(u));
+      this.userService.addUser(u).subscribe(
         data => {
           this.toastr.success("User Added Successfully !");
           this.router.navigate(['/user']);
@@ -203,9 +173,10 @@ export class UserUpsertComponent implements OnInit {
 
     //update
     if (this.btnValue == 'Update User') {
-      //u.userEmail = this.userToUpdate.userEmail;
-      console.log(JSON.stringify(u));
-      this.userService.updateUser(u).subscribe(
+      this.inputPassword?.clearValidators();
+      this.inputEmail?.clearValidators();
+      console.log(this.userUid);
+      this.userService.updateUser(u, this.userUid).subscribe(
         data => {
           this.toastr.success("User Updated Successfully !");
           this.router.navigate(['/user']);
@@ -218,23 +189,17 @@ export class UserUpsertComponent implements OnInit {
   }
 
   onSubmit() {
-    // if (this.userFormGroup.invalid) {
-    //   if(this.btnValue == "Add User"){
-    //     this.userFormGroup.markAllAsTouched();
-    //     this.toastr.warning("Please fill the form properly!");
-    //     return;
-    //   }
-    //   else{
-    //     this.inputPassword?.clearValidators();
-    //   }
-    // }
-
-
-    // this.upsertUser();
-    // this.userFormGroup.reset();
+    if (this.userFormGroup.invalid) {
+      if(this.btnValue == 'Add User'){
+        this.userFormGroup.markAllAsTouched();
+        this.toastr.warning("Please fill the form properly!");
+        return;
+      }
+    }
 
     this.upsertUser();
 
+    this.userFormGroup.reset();
   }
 
   change(key: string, event: Event) {

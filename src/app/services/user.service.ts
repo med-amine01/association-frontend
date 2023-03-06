@@ -21,11 +21,11 @@ export class UserService {
     private userAuthService: UserAuthService
   ) { }
   addUser(user: User): Observable<any> {
-    return this.httpClient.post<User>(this.USER_API_URL + "/addUser", User);
+    return this.httpClient.post<User>(this.USER_API_URL + "/addUser", user);
   }
 
-  updateUser(user: User) {
-    return this.httpClient.patch<User>(this.USER_API_URL + "/update", User);
+  updateUser(user: User, email : string) {
+    return this.httpClient.patch<User>(this.USER_API_URL + "/update/"+email, user);
   }
 
   deleteUser(id: string) {
@@ -65,6 +65,6 @@ export class UserService {
 interface GetPatients
 {
   _embedded:{
-    patients: User[];
+    users: User[];
   }
 }

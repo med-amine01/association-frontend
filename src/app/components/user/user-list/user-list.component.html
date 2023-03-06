@@ -29,7 +29,10 @@
                                             <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: {{u.phone}}
                                         </li>
                                         <li class="small mt-2">
-                                            <span class="fa-li"><i class="fas fa-user-shield"></i></span> User Role : <p *ngFor="let r of u.roles">{{r.roleName}},</p>
+                                          <span class="fa-li"><i class="fas fa-address-card"></i></span> Phone #: {{u.address}}
+                                        </li>
+                                        <li class="small mt-2">
+                                            <span class="fa-li"><i class="fas fa-user-shield"></i></span> User Role : <p *ngFor="let r of u.roles">{{r.roleName}}</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -41,7 +44,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-right">
-                                <a routerLink="/user/upsert/{{u.userEmail}}" class="btn btn-info btn-sm">
+                                <a routerLink="/user/upsert/{{u.uuid}}" class="btn btn-info btn-sm">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Edit

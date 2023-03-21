@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   isLoading: boolean = false;
 
   constructor(
-    private userService : UserService, 
+    private userService : UserService,
     private userAuthService : UserAuthService,
     private router : Router
   ) {}
@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
          if(role === 'ROLE_ADMIN'){
            this.router.navigate(['/dashboard']);
+         }
+         else {
+           // TODO : arja3 thabet mba3ed 7asseb role win bech t'hezou
+           this.router.navigate(['/forbidden'])
          }
       },
       (error) => {

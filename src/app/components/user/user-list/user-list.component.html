@@ -26,13 +26,32 @@
                                     <h2 class="lead"><b>{{u.userFirstName}} &nbsp; {{u.userLastName}}</b></h2>
                                     <ul class="ml-4 mb-0 fa-ul text-muted">
                                         <li class="small">
-                                            <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: {{u.phone}}
+                                            <span class="fa-li"><i class="fas fa-phone"></i></span> Phone : {{u.phone}}
                                         </li>
                                         <li class="small mt-2">
-                                          <span class="fa-li"><i class="fas fa-address-card"></i></span> Phone #: {{u.address}}
+                                          <span class="fa-li"><i class="fas fa-address-card"></i></span> address : {{u.address}}
                                         </li>
                                         <li class="small mt-2">
-                                            <span class="fa-li"><i class="fas fa-user-shield"></i></span> User Role : <p *ngFor="let r of u.roles">{{r.roleName}}</p>
+                                          <span class="fa-li"><i class="fas fa-user-shield"></i></span> User Role :
+                                          <div class="row">
+                                            <div *ngFor="let r of u.roles" class="col">
+                                              <span *ngIf="r.roleName == 'ROLE_ADMIN'" class="badge badge-success">
+                                                {{r.roleDescription}}
+                                              </span>
+                                              <span *ngIf="r.roleName == 'ROLE_CEO'" class="badge badge-info">
+                                                {{r.roleDescription}}
+                                              </span>
+                                              <span *ngIf="r.roleName == 'ROLE_FUNDER'" class="badge badge-warning">
+                                                {{r.roleDescription}}
+                                              </span>
+                                              <span *ngIf="r.roleName == 'ROLE_WORKER'" class="badge badge-secondary">
+                                                {{r.roleDescription}}
+                                              </span>
+                                              <span *ngIf="r.roleName == 'ROLE_SG'" class="badge badge-primary">
+                                                {{r.roleDescription}}
+                                              </span>
+                                            </div>
+                                          </div>
                                         </li>
                                     </ul>
                                 </div>

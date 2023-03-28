@@ -28,9 +28,16 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
 
 //select2
 import { Select2Module } from 'ng-select2-component';
+import { RequestListComponent } from './components/request/request-list/request-list.component';
+import { RequestUpsertComponent } from './components/request/request-upsert/request-upsert.component';
 
 
 const routes: Routes = [
+  //REQUEST
+  { path: 'request', component: RequestListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  { path: 'request/upsert/:id', component: RequestUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  { path: 'request/upsert', component: RequestUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+
   //PATIENT
   { path: 'patient/upsert/:id', component: PatientUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
   { path: 'patient/upsert', component: PatientUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
@@ -72,7 +79,9 @@ const routes: Routes = [
     PatientUpsertComponent,
     PatientListComponent,
     UserUpsertComponent,
-    UserListComponent
+    UserListComponent,
+    RequestListComponent,
+    RequestUpsertComponent
   ],
 
   imports: [

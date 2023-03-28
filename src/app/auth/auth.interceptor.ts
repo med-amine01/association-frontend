@@ -27,7 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             catchError(
                 (err:HttpErrorResponse)=>{
-                    console.log(err.status);
+                    console.log("status " + err.status);
                     //this user is not logged in (Unauthorized)
                     if(err.status === 401){
                         this.router.navigate(['/login']);
@@ -51,5 +51,5 @@ export class AuthInterceptor implements HttpInterceptor {
             }
         });
     }
-    
+
 }

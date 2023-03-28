@@ -45,11 +45,11 @@ export class ProjectListComponent implements OnInit{
       error => {
         console.log(error.message());
       }
-    )
+    );
   }
 
   calculateProgress(estimated : number, achieved : number) : number{
-    
+
     const progression = (achieved - 0) / (estimated - 100);
     const percentageProgression = progression * 100;
 

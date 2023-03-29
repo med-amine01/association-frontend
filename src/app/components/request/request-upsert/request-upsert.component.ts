@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
-import {Role} from "../../../common/role";
+import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../../common/user";
-import {RoleService} from "../../../services/role.service";
 import {UserService} from "../../../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
@@ -113,14 +111,13 @@ export class RequestUpsertComponent {
     this.inputRqName?.setValue(r.requestName);
     this.inputRqAmount?.setValue(r.requestedAmount);
     this.inputRqStatus?.setValue(r.requestStatus);
-    this.inputRqFunder?.setValue(r.funder.userFirstName);
+    this.inputRqFunder?.setValue(r.funder.userEmail);
 
+    //don't forget to use id to bind objects with select 2
     r.patients.forEach(element => {
-      this.selectedPatients.push(element.pname);
+      this.selectedPatients.push(element.id);
     });
-
-    console.log(this.selectedPatients);
-    this.inputRqPatient?.setValue(["Rocky Hettinger"]);
+    this.inputRqPatient?.setValue(this.selectedPatients);
   }
 
   get inputRqName() { return this.requestFormGroup.get('requestInfo.inputRqName'); }
@@ -145,66 +142,65 @@ export class RequestUpsertComponent {
   }
 
 
-  // upsertUser() {
-  //   let u = new User();
-  //   u.userFirstName = this.inputRqAmount?.value;
-  //   u.userLastName = this.inputRqFunder?.value;
-  //   u.phone = this.inputPhone?.value;
-  //   u.address = this.inputAddress?.value;
-  //
-  //   //you have to initilize roles before pushing inside the array because you will have error :
-  //   //u.roles is undefined
-  //   u.roles = [];
-  //   this.selectedRoles.forEach(element => {
-  //     u.roles.push({
-  //       roleName : element,
-  //       roleDescription : ''
-  //     })
-  //   });
-  //
-  //
-  //   //add
-  //   if (this.btnValue == 'Add User') {
-  //     u.userEmail = this.inputRqName?.value;
-  //     u.userPassword = this.inputRqPatient?.value;
-  //     console.log(+ JSON.stringify(u));
-  //     this.userService.addUser(u).subscribe(
-  //       data => {
-  //         this.toastr.success("User Added Successfully !");
-  //         this.router.navigate(['/user']);
-  //       }, error => {
-  //         alert("There was an error: " + error.message());
-  //       }
-  //     );
-  //   }
-  //
-  //   //update
-  //   if (this.btnValue == 'Update User') {
-  //     this.inputRqPatient?.clearValidators();
-  //     this.inputRqName?.clearValidators();
-  //     console.log(this.userUid);
-  //     this.userService.updateUser(u, this.userUid).subscribe(
-  //       data => {
-  //         this.toastr.success("User Updated Successfully !");
-  //         this.router.navigate(['/user']);
-  //       },
-  //       error => {
-  //         this.toastr.error("Error Updating + " + error.message());
-  //       }
-  //     );
-  //   }
-  // }
+  upsertRequest() {
+
+    let r = new Request();
+    r.requestName = this.inputRqName?.value;
+    r.requestedAmount = this.inputRqAmount?.value;
+    //TODO : tanseeh bech t7ot funder field hidden ki tabda enty makech admin
+
+    let f = new User();
+    f.userEmail = this.inputRqFunder?.value;
+    r.funder = f;
+
+    r.patients = [];
+    this.selectedPatients.forEach(element => {
+      //binding with id enough
+      let p = new Patient();
+      p.id = element;
+      r.patients.push(p);
+    });
+
+
+
+    //add
+    if (this.btnValue == 'Add Request') {
+      this.requestService.addRequest(r).subscribe(
+        data => {
+          this.toastr.success("Request Added Successfully !");
+          this.router.navigate(['/request']);
+        },
+        error => {
+          this.toastr.error("Error Updating + " + error.message());
+        }
+      );
+    }
+
+    //update
+    if (this.btnValue == 'Update Request') {
+        r.id = this.Requestid;
+        r.requestStatus = this.inputRqStatus?.value;
+
+      this.requestService.updateRequest(r).subscribe(
+        data => {
+          this.toastr.success("Request Updated Successfully !");
+          this.router.navigate(['/request']);
+        },
+        error => {
+          this.toastr.error("Error Updating + " + error.message());
+        }
+      );
+    }
+  }
 
   onSubmit() {
     if (this.requestFormGroup.invalid) {
-      if(this.btnValue == 'Add User'){
-        this.requestFormGroup.markAllAsTouched();
-        this.toastr.warning("Please fill the form properly!");
-        return;
-      }
+      this.requestFormGroup.markAllAsTouched();
+      this.toastr.warning("Please fill the form properly!");
+      return;
     }
 
-    //this.upsertUser();
+    this.upsertRequest();
 
     this.requestFormGroup.reset();
   }

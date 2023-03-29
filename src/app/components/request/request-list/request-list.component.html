@@ -58,10 +58,10 @@
             </small>
           </td>
           <td>
-            {{r.funder.userFirstName}}
+            {{r.funder.userFirstName}}&nbsp;{{r.funder.userLastName}}
           </td>
           <td class="project_progress">
-            {{r.requestedAmount}}
+            {{r.requestedAmount | currency}}
           </td>
           <td>
             {{r.requestStatus}}

@@ -6,8 +6,8 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
-      <div formGroupName="userInfo">
+    <form [formGroup]="requestFormGroup" (ngSubmit)="onSubmit()">
+      <div formGroupName="requestInfo">
         <div class="card-body">
           <div class="row">
             <div class="col">
@@ -22,9 +22,20 @@
             <div class="col">
               <div class="form-group">
                 <div class="form-group">
-                  <label >Request Amount</label>
+                  <label>Request Amount</label>
                   <input formControlName="inputRqAmount" type="number" class="form-control"
                          placeholder="Enter Request Amount">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="btnValue == 'Update Request'">
+            <div class="col">
+              <div class="form-group">
+                <div class="form-group">
+                  <label>Request Status</label>
+                  <input formControlName="inputRqStatus" type="text" class="form-control" value="{{requestToUpdate.requestStatus}}" readonly>
                 </div>
               </div>
             </div>
@@ -33,15 +44,10 @@
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label>Funder</label>
-                <select class="form-control select2" style="width: 100%;">
-                  <option selected="selected">Alabama</option>
-                  <option>Alaska</option>
-                  <option>California</option>
-                  <option>Delaware</option>
-                  <option>Tennessee</option>
-                  <option>Texas</option>
-                  <option>Washington</option>
+                <label>Funder(s)</label>
+                <select class="form-control select2" formControlName="inputRqFunder" style="width: 100%;">
+                  <option selected disabled>Select a Funder</option>
+                  <option *ngFor="let f of funders">{{f.userFirstName}}&nbsp;{{f.userLastName}}&nbsp;|&nbsp;{{f.userEmail}}</option>
                 </select>
               </div>
             </div>
@@ -51,20 +57,18 @@
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <div class="form-group">
-                  <label>Role(s)</label>
-                  <select2
-                    formControlName="inputRole"
-                    [(ngModel)]="selectedRoles"
-                    [overlay]="false"
-                    [data]="data"
-                    [multiple]="true"
-                    (update)="update('value1', $event)"
-                    (change)="change('change1', $event)" (search)="search('search1')"
-                    resettable
-                    id="selec2-1">
-                  </select2>
-                </div>
+                <label>Patient(s)</label>
+                <select2
+                  formControlName="inputRqPatient"
+                  [(ngModel)]="selectedPatients"
+                  [overlay]="false"
+                  [data]="data"
+                  [multiple]="true"
+                  (update)="update('value1', $event)"
+                  (change)="change('change1', $event)" (search)="search('search1')"
+                  resettable
+                  id="selec2-1">
+                </select2>
               </div>
             </div>
           </div>

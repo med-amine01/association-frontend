@@ -7,6 +7,10 @@ import {UserService} from "../../../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {Select2Option, Select2UpdateEvent} from "ng-select2-component";
+import {PatientService} from "../../../services/patient.service";
+import {Patient} from "../../../common/patient";
+import {Request} from "../../../common/request";
+import {RequestService} from "../../../services/request.service";
 
 @Component({
   selector: 'app-request-upsert',
@@ -14,19 +18,20 @@ import {Select2Option, Select2UpdateEvent} from "ng-select2-component";
   styleUrls: ['./request-upsert.component.css']
 })
 export class RequestUpsertComponent {
-  roles: Role[] = [];
+
+  funders : User[] = [];
+  patients : Patient [] = [];
   converted: any[] = [];
   data: any[] = [];
-  selectedRoles: any[]=[];
-
-  testing : any [] = ["test", "test"];
-  userFormGroup!: FormGroup;
-  userToUpdate: User = new User();
-  btnValue = 'Add User';
-  userUid !: string;
+  selectedPatients: any[]=[];
+  requestFormGroup!: FormGroup;
+  requestToUpdate: Request = new Request();
+  btnValue = 'Add Request';
+  Requestid !: number;
 
   constructor(
-    private roleService: RoleService,
+    private requestService : RequestService,
+    private patientService : PatientService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private route: ActivatedRoute,
@@ -37,168 +42,171 @@ export class RequestUpsertComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       this.formGroupInit();
-      this.initRoles();
-      this.initUserToUpdate();
+      this.initRequestToUpdate();
+      this.initFunders();
+      this.initPatients();
     });
   }
 
 
-  initUserToUpdate() {
+  initRequestToUpdate() {
     if (this.route.snapshot.paramMap.has('id')) {
-      this.userUid = this.route.snapshot.paramMap.get('id')!;
-      this.userService.getUser(this.userUid).subscribe(
+      this.Requestid = +this.route.snapshot.paramMap.get('id')!;
+      this.requestService.getRequest(this.Requestid).subscribe(
         data => {
-          this.userToUpdate = data;
-          this.settingFields(this.userToUpdate);
+          this.requestToUpdate = data;
+          this.settingFields(this.requestToUpdate);
         }
       );
-      this.btnValue = "Update User";
+      this.btnValue = "Update Request";
     }
   }
 
-  initRoles() {
-    this.roleService.getAllRoles().subscribe(
+  initPatients(){
+    this.patientService.getAllPatients().subscribe(
       data => {
-        this.roles = data;
+        this.patients = data;
 
         //this will map :
         // roleName => value
         // roleDescription => label
-        this.converted = this.roles.map(option => ({
-          value: option.roleName,
-          label: option.roleDescription
+        this.converted = this.patients.map(option => ({
+          value: option.id,
+          label: option.pname
         }));
 
         //this will set the array "data" to pass it to html <ngselect [data]="data">
         this.data = [{
-          label: "Roles",
+          label: "Patients",
           options: this.converted
         }]
+      },
+      error => {
+        console.log("patients error : "+error.message);
+      }
+    )
+  }
+  initFunders(){
+    this.userService.getUserByRole("ROLE_FUNDER").subscribe(
+      data=>{
+        this.funders = data;
+      },
+      error => {
+        console.log("error getting funders " + error.message);
       }
     )
   }
 
   formGroupInit() {
-    this.userFormGroup = this.formBuilder.group({
-      userInfo: this.formBuilder.group({
-        inputEmail: new FormControl('', [Validators.required, Validators.email]),
-        inputFirstName: new FormControl('', [Validators.required]),
-        inputLastName: new FormControl('', [Validators.required]),
-        inputPassword: new FormControl('', [Validators.required]),
-        inputPhone: new FormControl('', [Validators.required]),
-        inputAddress: new FormControl('', [Validators.required]),
-        inputRole: new FormControl('', [Validators.required]),
+    this.requestFormGroup = this.formBuilder.group({
+      requestInfo: this.formBuilder.group({
+        inputRqName: new FormControl('', [Validators.required]),
+        inputRqStatus: new FormControl(''),
+        inputRqAmount: new FormControl('', [Validators.required]),
+        inputRqFunder: new FormControl('', [Validators.required]),
+        inputRqPatient: new FormControl('', [Validators.required]),
       })
     })
   }
 
-  settingFields(u: User) {
-    this.inputEmail?.setValue(u.userEmail);
-    this.inputFirstName?.setValue(u.userFirstName);
-    this.inputLastName?.setValue(u.userLastName);
-    this.inputPhone?.setValue(u.phone);
-    this.inputAddress?.setValue(u.address);
-    u.roles.forEach(element => {
-      this.selectedRoles.push(element.roleName);
+  settingFields(r: Request) {
+    this.inputRqName?.setValue(r.requestName);
+    this.inputRqAmount?.setValue(r.requestedAmount);
+    this.inputRqStatus?.setValue(r.requestStatus);
+    this.inputRqFunder?.setValue(r.funder.userFirstName);
+
+    r.patients.forEach(element => {
+      this.selectedPatients.push(element.pname);
     });
-    this.inputRole?.setValue(this.selectedRoles);
+
+    console.log(this.selectedPatients);
+    this.inputRqPatient?.setValue(["Rocky Hettinger"]);
   }
 
-  get inputEmail() { return this.userFormGroup.get('userInfo.inputEmail'); }
-  get inputFirstName() { return this.userFormGroup.get('userInfo.inputFirstName'); }
-  get inputLastName() { return this.userFormGroup.get('userInfo.inputLastName'); }
-  get inputPassword() { return this.userFormGroup.get('userInfo.inputPassword'); }
-  get inputPhone() { return this.userFormGroup.get('userInfo.inputPhone'); }
-  get inputAddress() { return this.userFormGroup.get('userInfo.inputAddress'); }
-  get inputRole() { return this.userFormGroup.get('userInfo.inputRole'); }
+  get inputRqName() { return this.requestFormGroup.get('requestInfo.inputRqName'); }
+  get inputRqAmount() { return this.requestFormGroup.get('requestInfo.inputRqAmount'); }
+  get inputRqFunder() { return this.requestFormGroup.get('requestInfo.inputRqFunder'); }
+  get inputRqPatient() { return this.requestFormGroup.get('requestInfo.inputRqPatient'); }
+  get inputRqStatus() { return this.requestFormGroup.get('requestInfo.inputRqStatus'); }
 
 
   //VALIDATORS
-  inputEmailValid(): boolean {
-    return this.inputEmail?.invalid && (this.inputEmail?.dirty || this.inputEmail?.touched) ? true : false;
+  inputRqNameValid(): boolean {
+    return this.inputRqName?.invalid && (this.inputRqName?.dirty || this.inputRqName?.touched) ? true : false;
   }
-  inputFirstNameValid(): boolean {
-    return this.inputFirstName?.invalid && (this.inputFirstName?.dirty || this.inputFirstName?.touched) ? true : false;
+  inputRqAmountValid(): boolean {
+    return this.inputRqAmount?.invalid && (this.inputRqAmount?.dirty || this.inputRqAmount?.touched) ? true : false;
   }
-  inputLastNameValid(): boolean {
-    return this.inputLastName?.invalid && (this.inputLastName?.dirty || this.inputLastName?.touched) ? true : false;
+  inputRqFunderValid(): boolean {
+    return this.inputRqFunder?.invalid && (this.inputRqFunder?.dirty || this.inputRqFunder?.touched) ? true : false;
   }
-  inputPasswordValid(): boolean {
-    return this.inputPassword?.invalid && (this.inputPassword?.dirty || this.inputPassword?.touched) ? true : false;
-  }
-  inputPhoneValid(): boolean {
-    return this.inputPhone?.invalid && (this.inputPhone?.dirty || this.inputPhone?.touched) ? true : false;
-  }
-  inputAddressValid(): boolean {
-    return this.inputAddress?.invalid && (this.inputAddress?.dirty || this.inputAddress?.touched) ? true : false;
-  }
-  inputRoleValid(): boolean {
-    return this.inputRole?.invalid && (this.inputRole?.dirty || this.inputRole?.touched) ? true : false;
+  inputRqPatientValid(): boolean {
+    return this.inputRqPatient?.invalid && (this.inputRqPatient?.dirty || this.inputRqPatient?.touched) ? true : false;
   }
 
 
-  upsertUser() {
-    let u = new User();
-    u.userFirstName = this.inputFirstName?.value;
-    u.userLastName = this.inputLastName?.value;
-    u.phone = this.inputPhone?.value;
-    u.address = this.inputAddress?.value;
-
-    //you have to initilize roles before pushing inside the array because you will have error :
-    //u.roles is undefined
-    u.roles = [];
-    this.selectedRoles.forEach(element => {
-      u.roles.push({
-        roleName : element,
-        roleDescription : ''
-      })
-    });
-
-
-    //add
-    if (this.btnValue == 'Add User') {
-      u.userEmail = this.inputEmail?.value;
-      u.userPassword = this.inputPassword?.value;
-      console.log(+ JSON.stringify(u));
-      this.userService.addUser(u).subscribe(
-        data => {
-          this.toastr.success("User Added Successfully !");
-          this.router.navigate(['/user']);
-        }, error => {
-          alert("There was an error: " + error.message());
-        }
-      );
-    }
-
-    //update
-    if (this.btnValue == 'Update User') {
-      this.inputPassword?.clearValidators();
-      this.inputEmail?.clearValidators();
-      console.log(this.userUid);
-      this.userService.updateUser(u, this.userUid).subscribe(
-        data => {
-          this.toastr.success("User Updated Successfully !");
-          this.router.navigate(['/user']);
-        },
-        error => {
-          this.toastr.error("Error Updating + " + error.message());
-        }
-      );
-    }
-  }
+  // upsertUser() {
+  //   let u = new User();
+  //   u.userFirstName = this.inputRqAmount?.value;
+  //   u.userLastName = this.inputRqFunder?.value;
+  //   u.phone = this.inputPhone?.value;
+  //   u.address = this.inputAddress?.value;
+  //
+  //   //you have to initilize roles before pushing inside the array because you will have error :
+  //   //u.roles is undefined
+  //   u.roles = [];
+  //   this.selectedRoles.forEach(element => {
+  //     u.roles.push({
+  //       roleName : element,
+  //       roleDescription : ''
+  //     })
+  //   });
+  //
+  //
+  //   //add
+  //   if (this.btnValue == 'Add User') {
+  //     u.userEmail = this.inputRqName?.value;
+  //     u.userPassword = this.inputRqPatient?.value;
+  //     console.log(+ JSON.stringify(u));
+  //     this.userService.addUser(u).subscribe(
+  //       data => {
+  //         this.toastr.success("User Added Successfully !");
+  //         this.router.navigate(['/user']);
+  //       }, error => {
+  //         alert("There was an error: " + error.message());
+  //       }
+  //     );
+  //   }
+  //
+  //   //update
+  //   if (this.btnValue == 'Update User') {
+  //     this.inputRqPatient?.clearValidators();
+  //     this.inputRqName?.clearValidators();
+  //     console.log(this.userUid);
+  //     this.userService.updateUser(u, this.userUid).subscribe(
+  //       data => {
+  //         this.toastr.success("User Updated Successfully !");
+  //         this.router.navigate(['/user']);
+  //       },
+  //       error => {
+  //         this.toastr.error("Error Updating + " + error.message());
+  //       }
+  //     );
+  //   }
+  // }
 
   onSubmit() {
-    if (this.userFormGroup.invalid) {
+    if (this.requestFormGroup.invalid) {
       if(this.btnValue == 'Add User'){
-        this.userFormGroup.markAllAsTouched();
+        this.requestFormGroup.markAllAsTouched();
         this.toastr.warning("Please fill the form properly!");
         return;
       }
     }
 
-    this.upsertUser();
+    //this.upsertUser();
 
-    this.userFormGroup.reset();
+    this.requestFormGroup.reset();
   }
 
   change(key: string, event: Event) {

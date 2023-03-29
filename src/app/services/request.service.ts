@@ -29,7 +29,7 @@ export class RequestService {
   }
 
   getRequest(id: number): Observable<Request>{
-    return this.httpClient.get<Request>(this.REQUEST_API_URL+"get/"+id);
+    return this.httpClient.get<Request>(this.REQUEST_API_URL+"/get/"+id);
   }
 
   getRequestByStatus(status : string): Observable<Request[]>{

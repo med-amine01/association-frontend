@@ -32,6 +32,9 @@ export class UserService {
     return this.httpClient.delete<User>(this.USER_API_URL + "/delete/" + id);
   }
 
+  getUserByRole(role : string): Observable<User[]> {
+    return this.httpClient.get<any>(this.USER_API_URL + "/getByRole/"+role);
+  }
   getAllUsers(): Observable<User[]> {
     return this.httpClient.get<any>(this.USER_API_URL + "/getall");
   }

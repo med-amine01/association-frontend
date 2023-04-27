@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RequestUpsertComponent } from './request-upsert.component';
+import {RequestUpsertComponent} from './request-upsert.component';
 
 describe('RequestUpsertComponent', () => {
   let component: RequestUpsertComponent;

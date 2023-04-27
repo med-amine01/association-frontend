@@ -1,13 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Role } from '../common/role';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Role} from '../common/role';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
-  private ROLE_API_URL = 'http://localhost:8080/api/role';
+  private ROLE_API_URL = 'http://localhost:8090/api/role';
 
   constructor(private httpClient : HttpClient) { }
 

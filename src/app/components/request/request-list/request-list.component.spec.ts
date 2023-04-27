@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RequestListComponent } from './request-list.component';
+import {RequestListComponent} from './request-list.component';
 
 describe('RequestListComponent', () => {
   let component: RequestListComponent;

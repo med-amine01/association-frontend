@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Project } from '../common/project';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Project} from '../common/project';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
 
-  private PROJECT_API_URL = 'http://localhost:8080/api/project';
+  private PROJECT_API_URL = 'http://localhost:8090/api/project';
   constructor(private httpClient : HttpClient) { }
 
   addPoject(project : Project) : Observable<any>{

@@ -1,4 +1,5 @@
-import { Role } from "./role";
+import {Role} from "./role";
+import {Account} from "./account";
 
 export class User {
 
@@ -11,4 +12,5 @@ export class User {
     address !: string;
     active !: boolean;
     roles !: Role[];
+    account !: Account;
 }

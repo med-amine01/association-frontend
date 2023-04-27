@@ -1,8 +1,8 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/common/user';
-import { UserService } from 'src/app/services/user.service';
+import {Location} from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {User} from 'src/app/common/user';
+import {UserService} from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-list',

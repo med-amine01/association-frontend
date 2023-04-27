@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Role } from 'src/app/common/role';
-import { RoleService } from 'src/app/services/role.service';
-import { Select2Option, Select2UpdateEvent } from 'ng-select2-component';
-import { User } from 'src/app/common/user';
-import { UserService } from 'src/app/services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
-
+import {Component, OnInit} from '@angular/core';
+import {Role} from 'src/app/common/role';
+import {RoleService} from 'src/app/services/role.service';
+import {Select2Option, Select2UpdateEvent} from 'ng-select2-component';
+import {User} from 'src/app/common/user';
+import {UserService} from 'src/app/services/user.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -160,7 +158,7 @@ export class UserUpsertComponent implements OnInit {
     if (this.btnValue == 'Add User') {
       u.userEmail = this.inputEmail?.value;
       u.userPassword = this.inputPassword?.value;
-      console.log(+ JSON.stringify(u));
+      console.log(JSON.stringify(u));
       this.userService.addUser(u).subscribe(
         data => {
           this.toastr.success("User Added Successfully !");

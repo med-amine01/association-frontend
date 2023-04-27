@@ -1,8 +1,8 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Project } from 'src/app/common/project';
-import { ProjectService } from 'src/app/services/project.service';
+import {Location} from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {Project} from 'src/app/common/project';
+import {ProjectService} from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project-list',

@@ -1,16 +1,16 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from '../common/user';
-import { UserAuthService } from './user-auth.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {User} from '../common/user';
+import {UserAuthService} from './user-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  PATH_OF_API = "http://localhost:8080";
-  USER_API_URL = "http://localhost:8080/api/user";
+  PATH_OF_API = "http://localhost:8090";
+  USER_API_URL = "http://localhost:8090/api/user";
 
   requestHeader = new HttpHeaders({
     "No-Auth": "True"

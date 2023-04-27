@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Project } from 'src/app/common/project';
-import { ProjectService } from 'src/app/services/project.service';
+import {Component} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Project} from 'src/app/common/project';
+import {ProjectService} from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project-add',
@@ -133,7 +133,7 @@ export class ProjectAddComponent {
         }
       );
     }
-   
+
   }
 
   onSubmit() {

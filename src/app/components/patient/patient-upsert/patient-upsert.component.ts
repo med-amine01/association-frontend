@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Patient } from 'src/app/common/patient';
-import { PatientService } from 'src/app/services/patient.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Patient} from 'src/app/common/patient';
+import {PatientService} from 'src/app/services/patient.service';
 
 @Component({
   selector: 'app-patient-upsert',
@@ -70,7 +70,7 @@ export class PatientUpsertComponent implements OnInit{
   get inputNumber() { return this.patientFormGroup.get('patientInfo.inputNumber'); }
   get inputHealthStatus() { return this.patientFormGroup.get('patientInfo.inputHealthStatus'); }
   get inputAmountNeeded() { return this.patientFormGroup.get('patientInfo.inputAmountNeeded'); }
-  
+
   //VALIDATORS
   inputNameValid(): boolean {
     return this.inputName?.invalid && (this.inputName?.dirty || this.inputName?.touched) ? true : false;
@@ -117,7 +117,7 @@ export class PatientUpsertComponent implements OnInit{
           this.toastr.error("Error Updating + " + error.message());
         }
       );
-    } 
+    }
   }
 
   onSubmit() {

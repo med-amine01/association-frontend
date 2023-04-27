@@ -1,8 +1,8 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Patient } from 'src/app/common/patient';
-import { PatientService } from 'src/app/services/patient.service';
+import {Location} from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {Patient} from 'src/app/common/patient';
+import {PatientService} from 'src/app/services/patient.service';
 
 @Component({
   selector: 'app-patient-list',

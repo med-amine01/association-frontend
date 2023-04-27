@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Patient } from '../common/patient';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Patient} from '../common/patient';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
 
-  private PATIENT_API_URL = 'http://localhost:8080/api/patient';
+  private PATIENT_API_URL = 'http://localhost:8090/api/patient';
   constructor(private httpClient : HttpClient) { }
 
   addPatient(patient : Patient) : Observable<any>{

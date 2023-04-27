@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AsideBarComponent } from './aside-bar.component';
+import {AsideBarComponent} from './aside-bar.component';
 
 describe('AsideBarComponent', () => {
   let component: AsideBarComponent;

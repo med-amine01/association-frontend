@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,12 +13,12 @@ export class DashboardComponent implements OnInit{
     this.loadScript('/assets/plugins/chart.js/Chart.min.js');
     this.loadScript('/assets/dist/js/pages/dashboard3.js');
   }
-  
+
   loadScript(url: string) {
     const script = this.renderer.createElement('script');
     script.type = 'text/javascript';
     script.src = url;
     this.renderer.appendChild(document.body, script);
   }
-  
+
 }

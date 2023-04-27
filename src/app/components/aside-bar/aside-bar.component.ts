@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import {Component} from '@angular/core';
+import {UserService} from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-aside-bar',
@@ -16,5 +16,5 @@ export class AsideBarComponent {
     return this.userService.roleMatch(role);
   }
 
-  
+
 }

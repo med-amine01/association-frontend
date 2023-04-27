@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { UserAuthService } from '../services/user-auth.service';
-import { UserService } from '../services/user.service';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {Observable} from 'rxjs';
+import {UserAuthService} from '../services/user-auth.service';
+import {UserService} from '../services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +37,5 @@ export class AuthGuard implements CanActivate {
 
   //THIS AUTHGUARD will decide if a path should be accessible to user or NOT
 
-  
+
 }

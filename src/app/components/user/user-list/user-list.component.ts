@@ -12,6 +12,15 @@ import {UserService} from 'src/app/services/user.service';
 export class UserListComponent implements OnInit{
   users : User[] = [];
   id !: string;
+  currentItemList !: string;
+  itemList = [
+    { key: 'FUNDER', value: 'ROLE_FUNDER' },
+    { key: 'ADMIN', value: 'ROLE_ADMIN' },
+    { key: 'CEO', value: 'ROLE_CEO' },
+    { key: 'SG', value: 'ROLE_SG' },
+    { key: 'WORKER', value: 'ROLE_WORKER' },
+  ];
+
 
   constructor(
     private userService : UserService,
@@ -27,6 +36,11 @@ export class UserListComponent implements OnInit{
     this.id = id;
   }
 
+  getItemValue(item: string) {
+    this.currentItemList = item;
+    this.getByRole(item,true);
+  }
+
   listUsers(){
     this.userService.getAllUsers().subscribe(
       data => {
@@ -35,12 +49,34 @@ export class UserListComponent implements OnInit{
     );
   }
 
-  deleteUser(){
-    this.userService.deleteUser(this.id).subscribe(
+  getByRole(r : string, s : boolean) {
+    this.userService.getUserByCriteria(r,s).subscribe(
       data => {
-          this.toastr.success("User with ID = " + this.id + " Deleted Successfully");
+        this.users = data;
+      }
+    );
+  }
+
+  disableUser(){
+    this.userService.disableUser(this.id).subscribe(
+      data => {
+          this.toastr.success("User with UID = " + this.id + " Disabled Successfully");
           this.location.go(this.location.path());
           window.location.reload();
+      },
+      error => {
+        console.log(error.message());
+      }
+    )
+  }
+
+
+  enableUser(){
+    this.userService.enableUser(this.id).subscribe(
+      data => {
+        this.toastr.success("User with UID = " + this.id + " Enabled Successfully");
+        this.location.go(this.location.path());
+        window.location.reload();
       },
       error => {
         console.log(error.message());

@@ -28,12 +28,19 @@ export class UserService {
     return this.httpClient.patch<User>(this.USER_API_URL + "/update/"+email, user);
   }
 
-  deleteUser(id: string) {
-    return this.httpClient.delete<User>(this.USER_API_URL + "/delete/" + id);
+  disableUser(uid: string) {
+    return this.httpClient.delete<User>(this.USER_API_URL + "/disable/" + uid);
   }
 
-  getUserByRole(role : string): Observable<User[]> {
-    return this.httpClient.get<any>(this.USER_API_URL + "/getByRole/"+role);
+  enableUser(uid: string) {
+    return this.httpClient.patch<User>(this.USER_API_URL + "/enable/" + uid,null);
+  }
+
+  getUserByCriteria(role : string, active : boolean): Observable<User[]> {
+    if(active) {
+      return this.httpClient.get<any>(this.USER_API_URL + "/getBy/"+role+"/"+"1");
+    }
+    return this.httpClient.get<any>(this.USER_API_URL + "/getBy/"+role+"/"+"0");
   }
   getAllUsers(): Observable<User[]> {
     return this.httpClient.get<any>(this.USER_API_URL + "/getall");

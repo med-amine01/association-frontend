@@ -85,7 +85,7 @@ export class RequestUpsertComponent {
     )
   }
   initFunders(){
-    this.userService.getUserByRole("ROLE_FUNDER").subscribe(
+    this.userService.getUserByCriteria("ROLE_FUNDER",true).subscribe(
       data=>{
         this.funders = data;
       },

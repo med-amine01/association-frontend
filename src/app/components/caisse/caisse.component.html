@@ -1,0 +1,57 @@
+<div class="col">
+    <!-- general form elements -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Deposit Amount</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+          <div class="card-body">
+            <div class="row">
+             
+              <div class="col">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label> Amount</label>
+                    <input name="amount" type="number" class="form-control"
+                           placeholder="Enter Request Amount" ngModel #a="ngModel" min="0" required>
+                  </div>
+                <div class="error-message"
+                *ngIf="a.invalid && (a.dirty || a.touched)">
+                  invalid Amount
+            </div>
+                </div>
+              </div>
+            </div>
+  
+            
+  
+  
+          
+          <!-- /.card-body -->
+        </div>
+  
+  
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="a.invalid">Ajouter</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.card -->
+  
+  </div>
+  
+  
+  <script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+  
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+    });
+  </script>
+  

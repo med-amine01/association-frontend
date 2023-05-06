@@ -10,16 +10,14 @@ import {UserAuthService} from 'src/app/services/user-auth.service';
 })
 export class NavBarComponent implements OnInit {
   solde:Number=-1
-  amount:object={"amount" : 1200}
+  
   constructor(private userAuthService: UserAuthService, private router: Router, private caisseService:CaisseService) { }
   ngOnInit(): void {
     this.caisseService.getSolde().subscribe(  data => {
       this.solde = data;
     })
     
-    this.caisseService.withdrawMoney(1200).subscribe(  data => {
-      this.solde = data;
-    })
+    
   }
 
   public isLoggedIn() {

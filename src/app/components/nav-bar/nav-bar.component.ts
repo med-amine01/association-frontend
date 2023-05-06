@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import { CaisseService } from 'src/app/services/caisse.service';
 import {UserAuthService} from 'src/app/services/user-auth.service';
 
 @Component({
@@ -7,9 +8,19 @@ import {UserAuthService} from 'src/app/services/user-auth.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent {
-
-  constructor(private userAuthService: UserAuthService, private router: Router) { }
+export class NavBarComponent implements OnInit {
+  solde:Number=-1
+  amount:object={"amount" : 1200}
+  constructor(private userAuthService: UserAuthService, private router: Router, private caisseService:CaisseService) { }
+  ngOnInit(): void {
+    this.caisseService.getSolde().subscribe(  data => {
+      this.solde = data;
+    })
+    
+    this.caisseService.withdrawMoney(1200).subscribe(  data => {
+      this.solde = data;
+    })
+  }
 
   public isLoggedIn() {
     return this.userAuthService.isLoggedIn();

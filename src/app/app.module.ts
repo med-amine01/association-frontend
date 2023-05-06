@@ -32,12 +32,14 @@ import {RequestListComponent} from './components/request/request-list/request-li
 import {RequestUpsertComponent} from './components/request/request-upsert/request-upsert.component';
 import {AccountListComponent} from './components/account/account-list/account-list.component';
 import {AccountManagerComponent} from './components/account/account-manager/account-manager.component';
+import { CaisseComponent } from './components/caisse/caisse.component';
 
 
 const routes: Routes = [
   //ACCOUNT
   { path: 'account', component: AccountListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
   { path: 'account/manager', component: AccountManagerComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  { path: 'caisse', component: CaisseComponent , canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']}},
 
 
   //REQUEST
@@ -90,7 +92,8 @@ const routes: Routes = [
     RequestListComponent,
     RequestUpsertComponent,
     AccountListComponent,
-    AccountManagerComponent
+    AccountManagerComponent,
+    CaisseComponent
   ],
 
   imports: [

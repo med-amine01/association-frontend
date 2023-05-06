@@ -12,7 +12,6 @@ export class CaisseComponent {
   onSubmit(f:NgForm){
     console.log(f.value['amount'])
     this.caisseservice.depositMoney(f.value['amount']).subscribe(  data => {
-      console.log(data)
-    })
+    location.reload();    })
   }
 }

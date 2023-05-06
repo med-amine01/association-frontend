@@ -20,6 +20,11 @@ export class UserService {
     private httpClient: HttpClient,
     private userAuthService: UserAuthService
   ) { }
+
+
+  getUserByAccountId(accountId : number): Observable<User> {
+    return this.httpClient.get<User>(this.USER_API_URL + "/account/" + accountId);
+  }
   addUser(user: User): Observable<any> {
     return this.httpClient.post<User>(this.USER_API_URL + "/addUser", user);
   }
@@ -43,7 +48,7 @@ export class UserService {
     return this.httpClient.get<any>(this.USER_API_URL + "/getBy/"+role+"/"+"0");
   }
   getAllUsers(): Observable<User[]> {
-    return this.httpClient.get<any>(this.USER_API_URL + "/getall");
+    return this.httpClient.get<User[]>(this.USER_API_URL + "/getall");
   }
 
   getUser(id: string): Observable<User> {

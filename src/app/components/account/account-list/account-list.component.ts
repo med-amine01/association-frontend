@@ -9,11 +9,11 @@ import {AccountService} from "../../../services/account.service";
 })
 export class AccountListComponent implements OnInit{
   accounts : Account [] = [];
-
   constructor(private accountService : AccountService) {
   }
 
   ngOnInit(): void {
+
     this.listAccounts();
   }
 
@@ -21,10 +21,12 @@ export class AccountListComponent implements OnInit{
     this.accountService.getAllAccounts().subscribe(
       data => {
         this.accounts = data;
+        console.log(this.accounts);
       },
       error => {
-        console.log(error.message())
+        console.log(error.message());
       }
     );
   }
+
 }

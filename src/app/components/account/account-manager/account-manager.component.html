@@ -1,1 +1,147 @@
-<p>account-manager works!</p>
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="card card-primary d-flex flex-fill">
+          <div class="card-header">
+            <h3 class="card-title">User</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-7">
+                <h2 class="lead"><b>{{user.userFirstName}} {{user.userLastName}}</b></h2>
+                <ul class="ml-4 mb-0 fa-ul text-muted">
+                  <li class="small mt-3">
+                    <span class="fa-li"><i class="fas fa-phone"></i></span> Phone : {{user.phone}}
+                  </li>
+                  <li class="small mt-3">
+                    <span class="fa-li"><i class="fas fa-address-card"></i></span> address : {{user.address}}
+                  </li>
+                  <li class="small mt-3">
+                    <span class="fa-li"><i class="fas fa-user-shield"></i></span> User Role :
+                    <div class="row">
+                      <div *ngFor="let r of user.roles" class="col">
+                        <span *ngIf="r.roleName == 'ROLE_FUNDER'" class="badge badge-warning">
+                          {{r.roleDescription}}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-5 text-center">
+                <img src="assets/dist/img/user8-128x128.jpg" alt="user-avatar"
+                     class="img-circle img-fluid">
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="text-right">
+              <a routerLink="/user/upsert/{{user.uuid}}" class="btn btn-info btn-sm">
+                <i class="fas fa-pencil-alt">
+                </i>
+                Edit
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <div class="card card-secondary">
+        <div class="card-header">
+          <h3 class="card-title">Balance</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="balanceFromGroup" (ngSubmit)="onSubmitBalance()">
+            <div formGroupName="balanceInfo">
+              <div class="form-group">
+                <label for="inputSpentBudget">Current Balance</label>
+                <input type="text" [disabled]="true" id="inputSpentBudget" class="form-control" value="{{user.account[0].totalBalance | currency}}" step="1">
+              </div>
+              <div class="form-group">
+                <label for="inputEstimatedDuration">Add Balance</label>
+                <input type="number"
+                       id="inputEstimatedDuration"
+                       class="form-control"
+                       step="0.1"
+                       formControlName="inputBalance"
+                       [ngClass]="inputBalanceValide() ? 'form-control is-invalid' : 'form-control'">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <input type="submit" value="Deposit Balance" class="btn btn-success float-right">
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+
+    <div class="col">
+      <!-- /.card -->
+      <div class="card card-info">
+        <div class="card-header">
+          <h3 class="card-title">Files</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Transaction Type</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let trans of accountTransactions">
+              <td>
+                <a>
+                  {{trans.transactionType}}
+                </a>
+                <br />
+                <small>
+                  Created &nbsp;{{trans.transactionDate}}
+                </small>
+              </td>
+              <td>{{trans.amount | currency}}</td>
+              <td class="text-right py-0 align-middle">
+                <div class="btn-group btn-group-sm">
+                  <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                  <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+</section>
+<!-- /.content -->

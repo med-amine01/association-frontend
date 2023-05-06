@@ -38,7 +38,7 @@ import { CaisseComponent } from './components/caisse/caisse.component';
 const routes: Routes = [
   //ACCOUNT
   { path: 'account', component: AccountListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'account/manager', component: AccountManagerComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  { path: 'account/manager/:accountId', component: AccountManagerComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
   { path: 'caisse', component: CaisseComponent , canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']}},
 
 

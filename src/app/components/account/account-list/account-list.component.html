@@ -23,7 +23,7 @@
             #
           </th>
           <th style="width: 20%">
-            Account owner
+            Account ID
           </th>
           <th style="width: 30%">
             Total Balance
@@ -40,7 +40,7 @@
           </td>
           <td>
             <a>
-              {{acc.funder.userFirstName}}&nbsp;{{acc.funder.userLastName}}
+              {{acc.id}}
             </a>
             <br />
             <small>
@@ -60,7 +60,7 @@
             </div>
           </td>
           <td class="project-actions text-right">
-            <a routerLink="/project/detail" class="btn btn-primary btn-sm">
+            <a routerLink="/account/manager/{{acc.id}}" class="btn btn-primary btn-sm">
               <i class="fas fa-folder">
               </i>
               View

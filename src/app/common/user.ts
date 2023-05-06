@@ -12,5 +12,5 @@ export class User {
     address !: string;
     active !: boolean;
     roles !: Role[];
-    account !: Account;
+    account !: Account[];
 }

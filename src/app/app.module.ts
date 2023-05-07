@@ -55,10 +55,10 @@ const routes: Routes = [
   { path: 'patient', component: PatientListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
 
   //PROJECT
-  { path: 'project/upsert', component: ProjectAddComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'project/upsert/:id', component: ProjectAddComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'project/detail/:id', component: ProjectDetailComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN', 'ROLE_FUNDER']} },
-  { path: 'project', component: ProjectListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN', 'ROLE_FUNDER']} },
+  { path: 'project/upsert', component: ProjectAddComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG']} },
+  { path: 'project/upsert/:id', component: ProjectAddComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG']} },
+  { path: 'project/detail/:id', component: ProjectDetailComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN', 'ROLE_FUNDER','ROLE_SG']} },
+  { path: 'project', component: ProjectListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN', 'ROLE_FUNDER','ROLE_SG']} },
 
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },

@@ -44,7 +44,7 @@ const routes: Routes = [
 
   //REQUEST
 
-  { path: 'request', component: RequestListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG','ROLE_WORKER']} },
+  { path: 'request', component: RequestListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG','ROLE_WORKER', 'ROLE_FUNDER']} },
   { path: 'request/upsert/:id', component: RequestUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG','ROLE_WORKER']} },
   { path: 'request/upsert', component: RequestUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG','ROLE_WORKER']} },
 

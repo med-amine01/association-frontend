@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserAuthService} from 'src/app/services/user-auth.service';
 import {UserService} from 'src/app/services/user.service';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService : UserService,
     private userAuthService : UserAuthService,
-    private router : Router
+    private router : Router,
+    private toastr : ToastrService
   ) {}
 
 
@@ -30,10 +32,12 @@ export class LoginComponent implements OnInit {
       (response : any) => {
         this.userAuthService.setToken(response.jwtToken);
         this.userAuthService.setRoles(response.user.roles);
-        console.log("user logged in");
+        this.userAuthService.setUserUid(response.user.uuid);
+
+        this.toastr.success("Welcome Back "+response.user.userFirstName + " "+ response.user.userLastName);
          const role = response.user.roles[0].roleName;
           this.isLoading = false;
-         if(role === 'ROLE_ADMIN'){
+         if(role != ""){
            this.router.navigate(['/dashboard']);
          }
          else {
@@ -42,6 +46,7 @@ export class LoginComponent implements OnInit {
          }
       },
       (error) => {
+        this.toastr.error("Can't login check your credentials");
         console.log(error);
       }
     );

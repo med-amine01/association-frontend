@@ -42,27 +42,17 @@
           </div>
 
 
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                <label>Funder</label>
-                <select formControlName="inputRqFunder" id="inputRqFunder" class="form-control custom-select">
-                  <option selected disabled>Select one</option>
-                  <option *ngFor="let f of funders" value="{{f.userEmail}}">{{f.userFirstName}}&nbsp;{{f.userLastName}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
+       
 
 
           <div class="form-group">
-            <label>Patient(s)</label>
+            <label>Patient</label>
             <select2
               formControlName="inputRqPatient"
               [(ngModel)]="selectedPatients"
               [overlay]="false"
               [data]="data"
-              [multiple]="true"
+              [multiple]="false"
               (update)="update('value1', $event)"
               (change)="change('change1', $event)"
               (search)="search('search1')"

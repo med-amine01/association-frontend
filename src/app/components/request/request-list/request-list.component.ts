@@ -98,6 +98,7 @@ export class RequestListComponent implements OnInit{
             }
       );
     }
+    location.reload()
   }
   roleMatching(role : any){
     //console.log("matching = " + this.userService.roleMatch(role));

@@ -65,6 +65,11 @@
             {{r.requestStatus}}
           </td>
           <td class="project-actions text-right">
+            <a *ngIf="roleMatching(['ROLE_ADMIN', 'ROLE_SG'])" (click)="accepReq(r)" class="btn btn-success btn-sm ml-2">
+              <i class="fas fa-angle-left">
+              </i>
+              Accept
+            </a>
             <a routerLink="/project/detail" class="btn btn-primary btn-sm">
               <i class="fas fa-folder">
               </i>
@@ -81,6 +86,7 @@
               </i>
               Delete
             </a>
+           
             <div class="modal fade" id="modal-default">
               <div class="modal-dialog">
                 <div class="modal-content">

@@ -124,7 +124,7 @@ export class RequestUpsertComponent implements OnInit {
     
       // binding with id enough
       let p = new Patient();
-      p.id = this.selectedPatients;
+      p = this.selectedPatients;
       r.patient=p;
     
   

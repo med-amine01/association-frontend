@@ -43,9 +43,9 @@ const routes: Routes = [
 
 
   //REQUEST
-  { path: 'request', component: RequestListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'request/upsert/:id', component: RequestUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'request/upsert', component: RequestUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  { path: 'request', component: RequestListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG','ROLE_WORKER']} },
+  { path: 'request/upsert/:id', component: RequestUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG','ROLE_WORKER']} },
+  { path: 'request/upsert', component: RequestUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG','ROLE_WORKER']} },
 
   //PATIENT
   { path: 'patient/upsert/:id', component: PatientUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },

@@ -29,17 +29,20 @@
           <th style="width: 1%">
             #
           </th>
-          <th style="width: 20%">
+          <th style="width: 15%">
             Request Name
           </th>
-          <th style="width: 20%">
-            Provider
+          <th style="width: 15%">
+            Patient
           </th>
-          <th style="width: 20%">
+          <th style="width: 15%">
             Requested Amount
           </th>
-          <th style="width: 20%">
+          <th style="width: 15%">
             Status
+          </th>
+          <th style="width: 15%">
+            Actions
           </th>
         </tr>
         </thead>
@@ -57,7 +60,9 @@
               Created &nbsp;{{r.createdAt}}
             </small>
           </td>
-
+          <td class="project_progress">
+            {{r.patient.pname }}
+          </td>
           <td class="project_progress">
             {{r.requestedAmount | currency}}
           </td>

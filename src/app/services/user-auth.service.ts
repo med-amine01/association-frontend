@@ -43,8 +43,8 @@ export class UserAuthService {
     localStorage.clear();
   }
 
-  public isLoggedIn() {
-    return this.getRoles() && this.getToken();
+  public isLoggedIn() : boolean {
+    return Boolean(this.getRoles() && this.getToken());
   }
 
   isFunderRole(): boolean {

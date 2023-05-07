@@ -1,7 +1,10 @@
 <!-- Main content -->
 <section class="content">
   <div class="row">
-    <div class="col-md-6">
+<!--    <div *ngIf="!isFunder">-->
+<!--      -->
+<!--    </div>-->
+    <div *ngIf="!isFunder" class="col-md-6">
       <div class="row">
         <div class="card card-primary d-flex flex-fill">
           <div class="card-header">
@@ -54,8 +57,7 @@
       </div>
     </div>
 
-
-    <div class="col-md-6">
+    <div *ngIf="!isFunder" class="col-md-6">
       <div class="card card-secondary">
         <div class="card-header">
           <h3 class="card-title">Balance</h3>
@@ -93,7 +95,6 @@
         <!-- /.card-body -->
       </div>
     </div>
-
     <div class="col">
       <!-- /.card -->
       <div class="card card-info">

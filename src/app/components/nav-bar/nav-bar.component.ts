@@ -15,16 +15,19 @@ export class NavBarComponent implements OnInit {
   currentUser : User = new User();
   isFunder : boolean = false;
   currentBalance : number = 0;
+  accountId : number = 0;
   constructor(private userAuthService: UserAuthService,
               private userService : UserService,
               private router: Router,
               private caisseService:CaisseService) { }
 
   ngOnInit(): void {
-    this.getCurrentUser();
-    this.caisseService.getSolde().subscribe(  data => {
-      this.solde = data;
-    })
+    if(this.isLoggedIn()) {
+      this.getCurrentUser();
+      this.caisseService.getSolde().subscribe(  data => {
+        this.solde = data;
+      })
+    }
   }
 
   getCurrentUser() {
@@ -34,6 +37,7 @@ export class NavBarComponent implements OnInit {
       data => {
         this.currentUser = data;
         this.currentBalance = data.account[0].currentBalance;
+        this.accountId = data.account[0].id;
       },
       error => {
         console.log(error.message());
@@ -47,6 +51,8 @@ export class NavBarComponent implements OnInit {
 
   public logout() {
     this.userAuthService.clear();
-    this.router.navigate(['/dashboard']);
+    //window.location.reload();
+    this.router.navigate(['/login']);
   }
+
 }

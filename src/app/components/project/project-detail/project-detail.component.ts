@@ -4,13 +4,14 @@ import {Account} from "../../../common/account";
 import {TransactionHistory} from "../../../common/transaction-history";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AccountService} from "../../../services/account.service";
 import {ToastrService} from "ngx-toastr";
 import {Request} from "../../../common/request";
 import {UserAuthService} from "../../../services/user-auth.service";
 import {Project} from "../../../common/project";
 import {RequestService} from "../../../services/request.service";
+import {ProjectService} from "../../../services/project.service";
 
 @Component({
   selector: 'app-project-detail',
@@ -22,13 +23,16 @@ export class ProjectDetailComponent {
   currentUser : User = new User();
   currentBalance :number = 0;
   balanceFromGroup!: FormGroup;
+  currentProject : Project = new Project();
   constructor(private formBuilder: FormBuilder,
               private userService : UserService,
               private requestService : RequestService,
               private userAuthService : UserAuthService,
               private route: ActivatedRoute,
+              private router : Router,
               private accountService : AccountService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private projectService : ProjectService) {
   }
 
   ngOnInit(): void {
@@ -36,9 +40,17 @@ export class ProjectDetailComponent {
       this.projectId = +this.route.snapshot.paramMap.get('id')!;
       this.getCurrentUser();
       this.formGroupInit();
+      this.initProject(this.projectId);
     });
   }
 
+  initProject(id : number) {
+    this.projectService.getProject(id).subscribe(
+      data => {
+        this.currentProject = data;
+      }
+    );
+  }
   formGroupInit() {
     this.balanceFromGroup = this.formBuilder.group({
       balanceInfo : this.formBuilder.group({
@@ -96,7 +108,7 @@ export class ProjectDetailComponent {
     this.requestService.addRequest(request).subscribe(
       data => {
         this.toastr.success("YOUR REQUEST HAS BEEN ADDED SUCCEFULLY ");
-        window.location.reload();
+        this.router.navigate(['/request']);
       },
       error => {
         console.log(error.message);

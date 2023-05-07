@@ -25,6 +25,10 @@ export class DashboardComponent implements OnInit{
     this.loadScript('/assets/plugins/chart.js/Chart.min.js', () => {
       this.loadScript('/assets/dist/js/pages/dashboard3.js', () => {
         // Callback function for the second script
+        if(localStorage.getItem('redirected') == "1") {
+          window.location.reload();
+          localStorage.setItem('redirected','0');
+        }
       });
     });
   }

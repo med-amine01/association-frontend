@@ -8,7 +8,7 @@ export class Request {
   requestStatus!:string;
   requestedAmount!:number;
   funder!:User;
-  patients!: Patient [];
+  patient!: Patient;
   projects!: Project [];
   createdAt !: Date;
   updatedAt !: Date;

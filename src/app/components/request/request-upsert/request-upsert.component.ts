@@ -89,7 +89,7 @@ export class RequestUpsertComponent implements OnInit {
     this.inputRqName?.setValue(r.requestName);
     this.inputRqAmount?.setValue(r.requestedAmount);
     this.inputRqStatus?.setValue(r.requestStatus);
-    this.selectedPatients = r.patients.id;
+    this.selectedPatients = r.patient.id;
   }
 
   get inputRqName() { return this.requestFormGroup.get('requestInfo.inputRqName'); }
@@ -125,11 +125,12 @@ export class RequestUpsertComponent implements OnInit {
       // binding with id enough
       let p = new Patient();
       p.id = this.selectedPatients;
-      r.patients=p;
+      r.patient=p;
     
   
     // add
     if (this.btnValue === 'Add Request') {
+      console.log(r)
       this.requestService.addRequest(r).subscribe(
         data => {
           this.toastr.success("Request Added Successfully !");

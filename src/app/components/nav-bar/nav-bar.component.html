@@ -6,12 +6,19 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a routerLink="/dashboard" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
-      <li>Solde dans Caisse: {{solde}}</li>
+
+      <li class="nav-item d-none d-sm-inline-block">
+        <a routerLink="/caisse" class="nav-link">Cash Balance : <b>{{solde | currency}} </b></a>
+      </li>
+
+      <li *ngIf="isFunder" class="nav-item d-none d-sm-inline-block">
+        <a routerLink="/caisse" class="nav-link">Current Balance : <b>{{currentBalance | currency}} </b></a>
+      </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -154,7 +161,7 @@
         </a>
       </li>
 
-      
+
     </ul>
 
   </nav>

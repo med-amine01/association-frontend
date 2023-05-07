@@ -3,6 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {Project} from 'src/app/common/project';
 import {ProjectService} from 'src/app/services/project.service';
+import {UserAuthService} from "../../../services/user-auth.service";
+import {Role} from "../../../common/role";
 
 @Component({
   selector: 'app-project-list',
@@ -13,7 +15,9 @@ export class ProjectListComponent implements OnInit{
 
   projects : Project[] = [];
   id !: number;
+  isFunder : boolean = false;
   constructor(
+    private userAuthService : UserAuthService,
     private projectService : ProjectService,
     private toastr: ToastrService,
     private location: Location)
@@ -21,6 +25,7 @@ export class ProjectListComponent implements OnInit{
 
   ngOnInit(): void {
     this.listProjects();
+    this.isFunder = this.userAuthService.isFunderRole();
   }
 
   setIdForModel(id : number){
@@ -34,6 +39,7 @@ export class ProjectListComponent implements OnInit{
       }
     );
   }
+
 
   deleteProject(){
     this.projectService.deleteProject(this.id).subscribe(

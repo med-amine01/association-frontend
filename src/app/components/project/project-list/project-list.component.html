@@ -90,22 +90,32 @@
                             <span *ngIf="p.projectStatus == 'On Hold'" class="badge badge-warning">{{p.projectStatus}}</span>
                             <span *ngIf="p.projectStatus == 'Canceled'" class="badge badge-danger">{{p.projectStatus}}</span>
                         </td>
+
                         <td class="project-actions text-right">
-                            <a routerLink="/project/detail" class="btn btn-primary btn-sm">
-                                <i class="fas fa-folder">
-                                </i>
-                                View
+                          <div *ngIf="isFunder; else notFunder">
+                            <a routerLink="/project/detail/{{p.id}}" class="btn btn-primary btn-sm">
+                              <i class="fas fa-folder">
+                              </i>
+                              View
+                            </a>
+                          </div>
+                          <ng-template #notFunder>
+                            <a routerLink="/project/detail/{{p.id}}" class="btn btn-primary btn-sm">
+                              <i class="fas fa-folder">
+                              </i>
+                              View
                             </a>
                             <a routerLink="/project/upsert/{{p.id}}" class="btn btn-info btn-sm ml-2">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Edit
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                              Edit
                             </a>
                             <a data-toggle="modal" data-target="#modal-default" (click)="setIdForModel(p.id)" class="btn btn-danger btn-sm ml-2">
-                                <i class="fas fa-trash">
-                                </i>
-                                Delete
+                              <i class="fas fa-trash">
+                              </i>
+                              Delete
                             </a>
+                          </ng-template>
                             <div class="modal fade" id="modal-default">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
@@ -127,7 +137,7 @@
                                 </div>
                                 <!-- /.modal-dialog -->
                             </div>
-                        </td>   
+                        </td>
                     </tr>
                 </tbody>
             </table>

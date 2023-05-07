@@ -24,8 +24,7 @@ export class AccountManagerComponent implements OnInit{
               private userService : UserService,
               private route: ActivatedRoute,
               private accountService : AccountService,
-              private toastr: ToastrService,
-              private location: Location) {
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -88,7 +87,6 @@ export class AccountManagerComponent implements OnInit{
     this.accountService.depositMoney(accDeposit).subscribe(
       data => {
         this.toastr.success("Successfully Deposit !");
-        //this.location.replaceState(this.location.path());
         window.location.reload();
       }, error => {
         alert("There was an error: " + error.message());

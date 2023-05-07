@@ -55,8 +55,8 @@ const routes: Routes = [
   //PROJECT
   { path: 'project/upsert', component: ProjectAddComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
   { path: 'project/upsert/:id', component: ProjectAddComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'project/detail', component: ProjectDetailComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'project', component: ProjectListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  { path: 'project/detail/:id', component: ProjectDetailComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN', 'ROLE_FUNDER']} },
+  { path: 'project', component: ProjectListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN', 'ROLE_FUNDER']} },
 
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },

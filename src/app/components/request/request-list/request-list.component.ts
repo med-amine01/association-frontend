@@ -3,8 +3,8 @@ import {Request} from "../../../common/request";
 import {RequestService} from "../../../services/request.service";
 import {ToastrService} from "ngx-toastr";
 import {Location} from "@angular/common";
-import { UserAuthService } from 'src/app/services/user-auth.service';
-import { UserService } from 'src/app/services/user.service';
+import {UserAuthService} from 'src/app/services/user-auth.service';
+import {UserService} from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-request-list',
@@ -15,13 +15,26 @@ export class RequestListComponent implements OnInit{
 
   requests : Request[] = [];
   id !: number;
-  constructor(private requestService : RequestService, private toastr : ToastrService, private location : Location,private userauth:UserAuthService,private userService:UserService) {
+  constructor(private requestService : RequestService,
+              private toastr : ToastrService,
+              private location : Location,
+              private userauth:UserAuthService,
+              private userService:UserService) {
   }
   ngOnInit(): void {
     this.listRequests();
   }
 
   listRequests(){
+    if(this.userauth.isFunderRole()) {
+      let uid = this.userauth.getUserUid();
+      // @ts-ignore
+      this.requestService.getRequestsByUid(uid).subscribe(
+        data =>{
+          this.requests = data;
+        }
+      );
+    }
     if(this.userauth.isSgRole()){
       this.requestService.getRequestByStatus("ACCEPTED_TO_SG").subscribe(
         data =>{
@@ -43,7 +56,7 @@ export class RequestListComponent implements OnInit{
         }
       );
     }
-    
+
   }
 
   deleteRequest(){
@@ -68,7 +81,7 @@ export class RequestListComponent implements OnInit{
       this.requestService.updateRequest(request).subscribe(
         data =>{
           this.toastr.success("Request Accepted")
-          console.log("ACCEPTED_SG") 
+          console.log("ACCEPTED_SG")
                }
       );
     }

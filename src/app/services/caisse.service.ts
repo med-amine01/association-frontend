@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Account } from '../common/account';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +21,5 @@ export class CaisseService {
     return this.httpClient.post(this.ACCOUNT_API_URL+"/retiresolde", amount);
   }
 
- 
+
 }

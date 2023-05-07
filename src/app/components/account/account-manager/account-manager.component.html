@@ -117,18 +117,17 @@
             </tr>
             </thead>
             <tbody>
-
             <tr *ngFor="let trans of accountTransactions">
               <td>
-                <a>
-                  {{trans.transactionType}}
+                <a [ngStyle]="{'color': trans.transactionType === 'DEPOSIT' ? '#8bc34a' : trans.transactionType === 'WITHDRAWAL' ? '#f44336' : ''}">
+                  <b>{{trans.transactionType}}</b>
                 </a>
                 <br />
                 <small>
                   Created &nbsp;{{trans.transactionDate}}
                 </small>
               </td>
-              <td>{{trans.amount | currency}}</td>
+              <td [ngStyle]="{'color': trans.transactionType === 'DEPOSIT' ? '#8bc34a' : trans.transactionType === 'WITHDRAWAL' ? '#f44336' : ''}"><b>{{trans.amount | currency}}</b></td>
               <td class="text-right py-0 align-middle">
                 <div class="btn-group btn-group-sm">
                   <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
@@ -136,6 +135,27 @@
                 </div>
               </td>
             </tr>
+
+
+
+            <!--            <tr *ngFor="let trans of accountTransactions">-->
+<!--              <td>-->
+<!--                <a>-->
+<!--                  {{trans.transactionType}}-->
+<!--                </a>-->
+<!--                <br />-->
+<!--                <small>-->
+<!--                  Created &nbsp;{{trans.transactionDate}}-->
+<!--                </small>-->
+<!--              </td>-->
+<!--              <td>{{trans.amount | currency}}</td>-->
+<!--              <td class="text-right py-0 align-middle">-->
+<!--                <div class="btn-group btn-group-sm">-->
+<!--                  <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
+<!--                  <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--            </tr>-->
             </tbody>
           </table>
         </div>

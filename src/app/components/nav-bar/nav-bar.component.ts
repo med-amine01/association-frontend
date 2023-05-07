@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import { CaisseService } from 'src/app/services/caisse.service';
+import {CaisseService} from 'src/app/services/caisse.service';
 import {UserAuthService} from 'src/app/services/user-auth.service';
 import {User} from "../../common/user";
 import {UserService} from "../../services/user.service";

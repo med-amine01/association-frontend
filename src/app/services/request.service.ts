@@ -12,6 +12,10 @@ export class RequestService {
   private REQUEST_API_URL = "http://localhost:8090/api/request";
   constructor(private httpClient: HttpClient) { }
 
+
+  getRequestsByUid(uid : string) : Observable<Request[]>{
+    return this.httpClient.get<any>(this.REQUEST_API_URL+"/funder/"+uid);
+  }
   addRequest(request : Request) : Observable<any>{
     return this.httpClient.post(this.REQUEST_API_URL+'/add', request);
   }

@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 import {User} from "../../../common/user";
-import {Account} from "../../../common/account";
-import {TransactionHistory} from "../../../common/transaction-history";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";

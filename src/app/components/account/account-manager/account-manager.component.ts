@@ -7,7 +7,6 @@ import {TransactionHistory} from "../../../common/transaction-history";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {AccountService} from "../../../services/account.service";
-import {Location} from "@angular/common";
 import {UserAuthService} from "../../../services/user-auth.service";
 
 @Component({

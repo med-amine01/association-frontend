@@ -4,7 +4,6 @@ import {ToastrService} from 'ngx-toastr';
 import {Project} from 'src/app/common/project';
 import {ProjectService} from 'src/app/services/project.service';
 import {UserAuthService} from "../../../services/user-auth.service";
-import {Role} from "../../../common/role";
 
 @Component({
   selector: 'app-project-list',

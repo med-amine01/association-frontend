@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { CaisseService } from 'src/app/services/caisse.service';
+import {Component} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {CaisseService} from 'src/app/services/caisse.service';
 
 @Component({
   selector: 'app-caisse',

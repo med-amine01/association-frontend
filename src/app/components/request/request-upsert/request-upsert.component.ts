@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Select2Option, Select2UpdateEvent } from 'ng-select2-component';
-import { PatientService } from '../../../services/patient.service';
-import { RequestService } from '../../../services/request.service';
-import { Patient } from '../../../common/patient';
-import { Request } from '../../../common/request';
-import { User } from 'src/app/common/user';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Select2Option, Select2UpdateEvent} from 'ng-select2-component';
+import {PatientService} from '../../../services/patient.service';
+import {RequestService} from '../../../services/request.service';
+import {Patient} from '../../../common/patient';
+import {Request} from '../../../common/request';
+import {User} from 'src/app/common/user';
 
 @Component({
   selector: 'app-request-upsert',
@@ -97,7 +97,7 @@ export class RequestUpsertComponent implements OnInit {
   get inputRqPatient() { return this.requestFormGroup.get('requestInfo.inputRqPatient'); }
   get inputRqStatus() { return this.requestFormGroup.get('requestInfo.inputRqStatus'); }
 
-  
+
 
   //VALIDATORS
   inputRqNameValid(): boolean {
@@ -106,7 +106,7 @@ export class RequestUpsertComponent implements OnInit {
   inputRqAmountValid(): boolean {
     return this.inputRqAmount?.invalid && (this.inputRqAmount?.dirty || this.inputRqAmount?.touched) ? true : false;
   }
- 
+
   inputRqPatientValid(): boolean {
     return this.inputRqPatient?.invalid && (this.inputRqPatient?.dirty || this.inputRqPatient?.touched) ? true : false;
   }
@@ -116,18 +116,18 @@ export class RequestUpsertComponent implements OnInit {
     r.requestName = this.inputRqName?.value;
     r.requestedAmount = this.inputRqAmount?.value;
     // TODO: tanseeh bech t7ot funder field hidden ki tabda enty makech admin
-  
+
     let f = new User();
-  
-  
-    
-    
+
+
+
+
       // binding with id enough
       let p = new Patient();
       p = this.selectedPatients;
       r.patient=p;
-    
-  
+
+
     // add
     if (this.btnValue === 'Add Request') {
       console.log(r)
@@ -141,12 +141,12 @@ export class RequestUpsertComponent implements OnInit {
         }
       );
     }
-  
+
     // update
     if (this.btnValue === 'Update Request') {
       r.id = this.requestId;
       r.requestStatus = this.inputRqStatus?.value;
-  
+
       this.requestService.updateRequest(r).subscribe(
         data => {
           this.toastr.success("Request Updated Successfully !");
@@ -158,23 +158,23 @@ export class RequestUpsertComponent implements OnInit {
       );
     }
   }
-  
+
   onSubmit() {
     if (this.requestFormGroup.invalid) {
       this.requestFormGroup.markAllAsTouched();
       this.toastr.warning("Please fill the form properly!");
       return;
     }
-  
+
     this.upsertRequest();
-  
+
     this.requestFormGroup.reset();
   }
-  
+
   change(key: string, event: Event) {
     // console.log("changing " + key, event);
   }
-  
+
   search(text: string) {
     this.data = text
       ? (JSON.parse(JSON.stringify(this.data)) as Select2Option[]).filter(
@@ -182,14 +182,13 @@ export class RequestUpsertComponent implements OnInit {
         )
       : JSON.parse(JSON.stringify(this.data));
   }
-  
+
   update(key: string, event: Select2UpdateEvent<any>): any {
     // console.log(event.value);
     return event.value;
   }
-  
+
 }
-  
-  
-  
-  
+
+
+

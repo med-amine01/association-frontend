@@ -84,7 +84,7 @@ export class UserAuthService {
     return false;
   }
 
-  isSgRole() {
+  isSgRole():boolean {
     for (const r of this.mapRolesFromLocalStorage()) {
       if (r.roleName === 'ROLE_SG') {
         return true;

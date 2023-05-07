@@ -8,6 +8,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {AccountService} from "../../../services/account.service";
 import {Location} from "@angular/common";
+import {UserAuthService} from "../../../services/user-auth.service";
 
 @Component({
   selector: 'app-account-manager',
@@ -20,10 +21,12 @@ export class AccountManagerComponent implements OnInit{
   UserAccounts : Account [] = [];
   accountTransactions : TransactionHistory [] = [];
   balanceFromGroup!: FormGroup;
+  isFunder : boolean =false;
   constructor(private formBuilder: FormBuilder,
               private userService : UserService,
               private route: ActivatedRoute,
               private accountService : AccountService,
+              private userAuthService : UserAuthService,
               private toastr: ToastrService) {
   }
 
@@ -31,6 +34,7 @@ export class AccountManagerComponent implements OnInit{
     this.route.paramMap.subscribe(() => {
       this.formGroupInit();
       this.getUserByAccountId();
+      this.isFunder = this.userAuthService.isFunderRole();
     });
   }
 

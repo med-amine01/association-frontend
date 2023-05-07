@@ -12,12 +12,12 @@
         <a href="#" class="nav-link">Contact</a>
       </li>
 
-      <li class="nav-item d-none d-sm-inline-block">
+      <li *ngIf="!isFunder && isLoggedIn()" class="nav-item d-none d-sm-inline-block">
         <a routerLink="/caisse" class="nav-link">Cash Balance : <b>{{solde | currency}} </b></a>
       </li>
 
-      <li *ngIf="isFunder" class="nav-item d-none d-sm-inline-block">
-        <a routerLink="/caisse" class="nav-link">Current Balance : <b>{{currentBalance | currency}} </b></a>
+      <li *ngIf="isFunder && isLoggedIn()" class="nav-item d-none d-sm-inline-block">
+        <a routerLink="/account/manager/{{accountId}}" class="nav-link">Current Balance : <b>{{currentBalance | currency}} </b></a>
       </li>
     </ul>
 

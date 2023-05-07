@@ -35,15 +35,17 @@ export class LoginComponent implements OnInit {
         this.userAuthService.setUserUid(response.user.uuid);
 
         this.toastr.success("Welcome Back "+response.user.userFirstName + " "+ response.user.userLastName);
-         const role = response.user.roles[0].roleName;
-          this.isLoading = false;
-         if(role != ""){
-           this.router.navigate(['/dashboard']);
-         }
-         else {
-           // TODO : arja3 thabet mba3ed 7asseb role win bech t'hezou
-           this.router.navigate(['/forbidden'])
-         }
+        const role = response.user.roles[0].roleName;
+        this.isLoading = false;
+
+        if(role != ""){
+          localStorage.setItem('redirected' , '1');
+         this.router.navigate(['/dashboard']);
+        }
+        else {
+         // TODO : arja3 thabet mba3ed 7asseb role win bech t'hezou
+         this.router.navigate(['/forbidden'])
+        }
       },
       (error) => {
         this.toastr.error("Can't login check your credentials");

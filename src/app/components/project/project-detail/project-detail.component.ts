@@ -107,6 +107,7 @@ export class ProjectDetailComponent {
       data => {
         this.toastr.success("YOUR REQUEST HAS BEEN ADDED SUCCEFULLY ");
         this.router.navigate(['/request']);
+        localStorage.setItem('reload','1');
       },
       error => {
         console.log(error.message);

@@ -33,9 +33,13 @@ import {RequestUpsertComponent} from './components/request/request-upsert/reques
 import {AccountListComponent} from './components/account/account-list/account-list.component';
 import {AccountManagerComponent} from './components/account/account-manager/account-manager.component';
 import {CaisseComponent} from './components/caisse/caisse.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 const routes: Routes = [
+
+  { path: 'home', component: HomeComponent},
+
   //ACCOUNT
   { path: 'account', component: AccountListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
   { path: 'account/manager/:accountId', component: AccountManagerComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN', 'ROLE_FUNDER']} },
@@ -69,7 +73,7 @@ const routes: Routes = [
   { path: 'user/upsert/:id', component: UserUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
   { path: 'user', component: UserListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
 
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } //** else of all routes (we can add 404 not found component
 ]
 
@@ -95,7 +99,8 @@ const routes: Routes = [
     RequestUpsertComponent,
     AccountListComponent,
     AccountManagerComponent,
-    CaisseComponent
+    CaisseComponent,
+    HomeComponent
   ],
 
   imports: [

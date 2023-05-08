@@ -28,6 +28,10 @@ export class RequestListComponent implements OnInit{
   listRequests(){
     if(this.userauth.isFunderRole()) {
       let uid = this.userauth.getUserUid();
+      if(localStorage.getItem('reload') == '1') {
+        window.location.reload();
+        localStorage.setItem('reload' , '0');
+      }
       // @ts-ignore
       this.requestService.getRequestsByUid(uid).subscribe(
         data =>{

@@ -17,7 +17,7 @@
       </li>
 
       <li *ngIf="isFunder && isLoggedIn()" class="nav-item d-none d-sm-inline-block">
-        <a routerLink="/account/manager/{{accountId}}" class="nav-link">Current Balance : <b>{{currentBalance | currency}} </b></a>
+        <a routerLink="/account/manager/{{accountId}}" class="nav-link">Current Balance : <b>{{currentBalance || 0 | currency }} </b></a>
       </li>
     </ul>
 

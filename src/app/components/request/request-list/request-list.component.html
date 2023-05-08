@@ -61,7 +61,7 @@
             </small>
           </td>
           <td class="project_progress">
-            {{r.patient.pname }}
+            {{ r.patient?.pname || '' }}
           </td>
           <td class="project_progress">
             {{r.requestedAmount | currency}}

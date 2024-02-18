@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  mysql-db:
+    container_name: mysql-db
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - association-network
+    ports:
+      - "6666:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
+  association-backend:
+    container_name: association-backend
+    image: madchicken98/association-backend:latest   # Updated image reference
+    environment:
+      - SPRING_PROFILES_ACTIVE=stg
+    networks:
+      - association-network
+    ports:
+      - "9090:8090"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+
+  association-frontend:
+    container_name: association-frontend
+    image: madchicken98/association-frontend:latest  # Updated image reference
+    ports:
+      - "80:80"
+    networks:
+      - association-network
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  association-network:
+    driver: bridge

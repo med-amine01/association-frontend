@@ -31,6 +31,7 @@
     transform: perspective(400px);
   }
 }
+
 @keyframes flipInX {
   0% {
     -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
@@ -308,16 +309,19 @@
     -ms-flex-direction: column;
     flex-direction: column;
   }
+
   .fc-toolbar .fc-left {
     -ms-flex-order: 1;
     order: 1;
     margin-bottom: .5rem;
   }
+
   .fc-toolbar .fc-center {
     -ms-flex-order: 0;
     order: 0;
     margin-bottom: .375rem;
   }
+
   .fc-toolbar .fc-right {
     -ms-flex-order: 2;
     order: 2;
@@ -9143,4 +9147,5 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 .dark-mode .jsgrid-selected-row > .jsgrid-cell {
   background-color: #3f474e;
 }
+
 /*# sourceMappingURL=adminlte.plugins.css.map */

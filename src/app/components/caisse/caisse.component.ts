@@ -8,10 +8,13 @@ import {CaisseService} from 'src/app/services/caisse.service';
   styleUrls: ['./caisse.component.css']
 })
 export class CaisseComponent {
-  constructor(private caisseservice:CaisseService){}
-  onSubmit(f:NgForm){
+  constructor(private caisseservice: CaisseService) {
+  }
+
+  onSubmit(f: NgForm) {
     console.log(f.value['amount'])
-    this.caisseservice.depositMoney(f.value['amount']).subscribe(  data => {
-    location.reload();    })
+    this.caisseservice.depositMoney(f.value['amount']).subscribe(data => {
+      location.reload();
+    })
   }
 }

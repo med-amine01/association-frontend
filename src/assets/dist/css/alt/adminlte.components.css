@@ -31,6 +31,7 @@
     transform: perspective(400px);
   }
 }
+
 @keyframes flipInX {
   0% {
     -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
@@ -12191,4 +12192,5 @@ button.close {
 a.close.disabled {
   pointer-events: none;
 }
+
 /*# sourceMappingURL=adminlte.components.css.map */

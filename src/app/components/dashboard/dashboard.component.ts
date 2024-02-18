@@ -5,8 +5,9 @@ import {Component, OnInit, Renderer2} from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
-  constructor(private renderer: Renderer2) {}
+export class DashboardComponent implements OnInit {
+  constructor(private renderer: Renderer2) {
+  }
 
 
   // ngOnInit() {
@@ -25,9 +26,9 @@ export class DashboardComponent implements OnInit{
     this.loadScript('/assets/plugins/chart.js/Chart.min.js', () => {
       this.loadScript('/assets/dist/js/pages/dashboard3.js', () => {
         // Callback function for the second script
-        if(localStorage.getItem('redirected') == "1") {
+        if (localStorage.getItem('redirected') == "1") {
           window.location.reload();
-          localStorage.setItem('redirected','0');
+          localStorage.setItem('redirected', '0');
         }
       });
     });

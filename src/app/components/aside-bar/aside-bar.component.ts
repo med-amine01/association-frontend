@@ -7,21 +7,19 @@ import {UserAuthService} from "../../services/user-auth.service";
   templateUrl: './aside-bar.component.html',
   styleUrls: ['./aside-bar.component.css']
 })
-export class AsideBarComponent implements OnInit{
+export class AsideBarComponent implements OnInit {
 
-  isLoggedIn : boolean =false;
-  constructor(private userService : UserService,
-              private userAuthService : UserAuthService)
-  {}
+  isLoggedIn: boolean = false;
+
+  constructor(private userService: UserService,
+              private userAuthService: UserAuthService) {
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = this.userAuthService.isLoggedIn();
   }
 
-  roleMatching(role : any){
-    //console.log("matching = " + this.userService.roleMatch(role));
+  roleMatching(role: any) {
     return this.userService.roleMatch(role);
   }
-
-
 }

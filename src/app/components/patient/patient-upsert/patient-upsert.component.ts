@@ -10,11 +10,11 @@ import {PatientService} from 'src/app/services/patient.service';
   templateUrl: './patient-upsert.component.html',
   styleUrls: ['./patient-upsert.component.css']
 })
-export class PatientUpsertComponent implements OnInit{
+export class PatientUpsertComponent implements OnInit {
 
   patientFormGroup!: FormGroup;
-  patientToUpdate : Patient = new Patient();
-  btnValue  = 'Add Patient';
+  patientToUpdate: Patient = new Patient();
+  btnValue = 'Add Patient';
   id!: number;
 
   constructor(
@@ -23,7 +23,8 @@ export class PatientUpsertComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -57,6 +58,7 @@ export class PatientUpsertComponent implements OnInit{
       })
     });
   }
+
   settingFields(p: Patient) {
     this.inputName?.setValue(p.pname);
     this.inputAddress?.setValue(p.paddress);
@@ -65,22 +67,39 @@ export class PatientUpsertComponent implements OnInit{
     this.inputAmountNeeded?.setValue(p.fundingNeeded);
   }
 
-  get inputName() { return this.patientFormGroup.get('patientInfo.inputName'); }
-  get inputAddress() { return this.patientFormGroup.get('patientInfo.inputAddress'); }
-  get inputNumber() { return this.patientFormGroup.get('patientInfo.inputNumber'); }
-  get inputHealthStatus() { return this.patientFormGroup.get('patientInfo.inputHealthStatus'); }
-  get inputAmountNeeded() { return this.patientFormGroup.get('patientInfo.inputAmountNeeded'); }
+  get inputName() {
+    return this.patientFormGroup.get('patientInfo.inputName');
+  }
+
+  get inputAddress() {
+    return this.patientFormGroup.get('patientInfo.inputAddress');
+  }
+
+  get inputNumber() {
+    return this.patientFormGroup.get('patientInfo.inputNumber');
+  }
+
+  get inputHealthStatus() {
+    return this.patientFormGroup.get('patientInfo.inputHealthStatus');
+  }
+
+  get inputAmountNeeded() {
+    return this.patientFormGroup.get('patientInfo.inputAmountNeeded');
+  }
 
   //VALIDATORS
   inputNameValid(): boolean {
     return this.inputName?.invalid && (this.inputName?.dirty || this.inputName?.touched) ? true : false;
   }
+
   inputNumberValid(): boolean {
     return this.inputNumber?.invalid && (this.inputNumber?.dirty || this.inputNumber?.touched) ? true : false;
   }
+
   inputHealthStatusValid(): boolean {
     return this.inputHealthStatus?.invalid && (this.inputHealthStatus?.dirty || this.inputHealthStatus?.touched) ? true : false;
   }
+
   inputAmountNeededValid(): boolean {
     return this.inputAmountNeeded?.invalid && (this.inputAmountNeeded?.dirty || this.inputAmountNeeded?.touched) ? true : false;
   }

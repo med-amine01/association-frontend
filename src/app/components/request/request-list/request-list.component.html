@@ -1,5 +1,5 @@
 <div class="row mb-3">
-  <div class="col-12">
+  <div class="col-12 mt-3">
     <a routerLink="/request/upsert" class="btn btn-success float-right">
       Create New Request &nbsp;<i class="fa fa-plus-circle"></i>
     </a>
@@ -33,7 +33,7 @@
             Request Name
           </th>
           <th style="width: 15%">
-            Patient
+            Patient/Project
           </th>
           <th style="width: 15%">
             Requested Amount
@@ -49,47 +49,58 @@
         <tbody>
         <tr *ngFor="let r of requests">
           <td>
-            #
+            {{ r.id }}
           </td>
           <td>
             <a>
-              {{r.requestName}}
+              {{ r.requestName }}
             </a>
-            <br />
+            <br/>
             <small>
-              Created &nbsp;{{r.createdAt}}
+              Created &nbsp;{{ r.createdAt }}
             </small>
           </td>
-          <td class="project_progress">
-            {{ r.patient?.pname || '' }}
+          <td class="project_progress" *ngIf="r.projects[0] != null; else patient">
+            {{ r.projects[0].projectName }}
           </td>
+          <ng-template #patient>
+            <td>
+              {{ r.patient.pname }}
+            </td>
+          </ng-template>
           <td class="project_progress">
-            {{r.requestedAmount | currency}}
+            {{ r.requestedAmount | currency }}
           </td>
           <td>
-            {{r.requestStatus}}
+            {{ r.requestStatus }}
           </td>
-          <td class="project-actions text-right">
+          <td class="project-actions-container">
             <a *ngIf="roleMatching(['ROLE_ADMIN', 'ROLE_SG'])" (click)="accepReq(r)" class="btn btn-success btn-sm">
-              <i class="fas fa-angle-left">
+              <i class="fas fa-check">
               </i>
-              Accept
             </a>
-            <a routerLink="/project/detail" class="btn btn-primary btn-sm ml-2">
-              <i class="fas fa-folder">
-              </i>
-              View
-            </a>
+            <div *ngIf="r.projects[0] != null; else patientId">
+              <a routerLink="/project/detail/{{ r.projects[0].id }}" class="btn btn-primary btn-sm ml-2">
+                <i class="fas fa-eye">
+                </i>
+              </a>
+            </div>
+            <ng-template #patientId>
+              <a routerLink="/patient/upsert/{{ r.patient.id }}" class="btn btn-primary btn-sm ml-2">
+                <i class="fas fa-eye">
+                </i>
+              </a>
+            </ng-template>
             <a routerLink="/request/upsert/{{r.id}}" class="btn btn-info btn-sm ml-2">
               <i class="fas fa-pencil-alt">
               </i>
-              Edit
             </a>
-            <a [ngClass]="r.requestStatus == 'ACCEPTED_ADMIN' || r.requestStatus == 'ACCEPTED_SG' ? 'btn btn-danger btn-sm ml-2 disabled' : 'btn btn-danger btn-sm ml-2'"
-              data-toggle="modal" data-target="#modal-default" (click)="setIdForModel(r.id)" class="btn btn-danger btn-sm ml-2">
+            <a
+              [ngClass]="r.requestStatus == 'ACCEPTED_ADMIN' || r.requestStatus == 'ACCEPTED_SG' ? 'btn btn-danger btn-sm ml-2 disabled' : 'btn btn-danger btn-sm ml-2'"
+              data-toggle="modal" data-target="#modal-default" (click)="setIdForModel(r.id)"
+              class="btn btn-danger btn-sm ml-2">
               <i class="fas fa-trash">
               </i>
-              Delete
             </a>
 
             <div class="modal fade" id="modal-default">
@@ -102,7 +113,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <h6><b>Are you sure you want to delete this request  ? </b></h6>
+                    <h6><b>Are you sure you want to delete this request ? </b></h6>
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

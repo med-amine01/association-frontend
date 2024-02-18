@@ -2,40 +2,42 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Patient} from '../common/patient';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
 
-  private PATIENT_API_URL = 'http://localhost:8090/api/patient';
-  constructor(private httpClient : HttpClient) { }
+  private PATIENT_API_URL: string = environment.API_BASE_URL + '/api/patient';
 
-  addPatient(patient : Patient) : Observable<any>{
-    return this.httpClient.post<Patient>(this.PATIENT_API_URL+"/add",patient);
+  constructor(private httpClient: HttpClient) {
   }
 
-  updatePatient(patient : Patient){
-    return this.httpClient.patch<Patient>(this.PATIENT_API_URL+"/update",patient);
+  addPatient(patient: Patient): Observable<any> {
+    return this.httpClient.post<Patient>(this.PATIENT_API_URL + "/add", patient);
   }
 
-  deletePatient(id:number){
-    return this.httpClient.delete<Patient>(this.PATIENT_API_URL+"/delete/"+id);
+  updatePatient(patient: Patient) {
+    return this.httpClient.patch<Patient>(this.PATIENT_API_URL + "/update", patient);
   }
 
-  getAllPatients() : Observable<Patient[]>{
-    return this.httpClient.get<any>(this.PATIENT_API_URL+"/getall");
+  deletePatient(id: number) {
+    return this.httpClient.delete<Patient>(this.PATIENT_API_URL + "/delete/" + id);
   }
 
-  getPatient(id: number): Observable<Patient>{
-    return this.httpClient.get<Patient>(this.PATIENT_API_URL+"/"+id);
+  getAllPatients(): Observable<Patient[]> {
+    return this.httpClient.get<any>(this.PATIENT_API_URL + "/getall");
+  }
+
+  getPatient(id: number): Observable<Patient> {
+    return this.httpClient.get<Patient>(this.PATIENT_API_URL + "/" + id);
   }
 
 }
 
-interface GetPatients
-{
-  _embedded:{
+interface GetPatients {
+  _embedded: {
     patients: Patient[];
   }
 }

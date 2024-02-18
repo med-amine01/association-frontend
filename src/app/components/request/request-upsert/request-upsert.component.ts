@@ -7,7 +7,6 @@ import {PatientService} from '../../../services/patient.service';
 import {RequestService} from '../../../services/request.service';
 import {Patient} from '../../../common/patient';
 import {Request} from '../../../common/request';
-import {User} from 'src/app/common/user';
 
 @Component({
   selector: 'app-request-upsert',
@@ -32,7 +31,8 @@ export class RequestUpsertComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -92,17 +92,28 @@ export class RequestUpsertComponent implements OnInit {
     this.selectedPatients = r.patient.id;
   }
 
-  get inputRqName() { return this.requestFormGroup.get('requestInfo.inputRqName'); }
-  get inputRqAmount() { return this.requestFormGroup.get('requestInfo.inputRqAmount'); }
-  get inputRqPatient() { return this.requestFormGroup.get('requestInfo.inputRqPatient'); }
-  get inputRqStatus() { return this.requestFormGroup.get('requestInfo.inputRqStatus'); }
+  get inputRqName() {
+    return this.requestFormGroup.get('requestInfo.inputRqName');
+  }
 
+  get inputRqAmount() {
+    return this.requestFormGroup.get('requestInfo.inputRqAmount');
+  }
+
+  get inputRqPatient() {
+    return this.requestFormGroup.get('requestInfo.inputRqPatient');
+  }
+
+  get inputRqStatus() {
+    return this.requestFormGroup.get('requestInfo.inputRqStatus');
+  }
 
 
   //VALIDATORS
   inputRqNameValid(): boolean {
     return this.inputRqName?.invalid && (this.inputRqName?.dirty || this.inputRqName?.touched) ? true : false;
   }
+
   inputRqAmountValid(): boolean {
     return this.inputRqAmount?.invalid && (this.inputRqAmount?.dirty || this.inputRqAmount?.touched) ? true : false;
   }
@@ -117,15 +128,10 @@ export class RequestUpsertComponent implements OnInit {
     r.requestedAmount = this.inputRqAmount?.value;
     // TODO: tanseeh bech t7ot funder field hidden ki tabda enty makech admin
 
-    let f = new User();
-
-
-
-
-      // binding with id enough
-      let p = new Patient();
-      p = this.selectedPatients;
-      r.patient=p;
+    // binding with id enough
+    let p = new Patient();
+    p = this.selectedPatients;
+    r.patient = p;
 
 
     // add
@@ -178,8 +184,8 @@ export class RequestUpsertComponent implements OnInit {
   search(text: string) {
     this.data = text
       ? (JSON.parse(JSON.stringify(this.data)) as Select2Option[]).filter(
-          option => option.label.toLowerCase().indexOf(text.toLowerCase()) > -1
-        )
+        option => option.label.toLowerCase().indexOf(text.toLowerCase()) > -1
+      )
       : JSON.parse(JSON.stringify(this.data));
   }
 

@@ -1,5 +1,5 @@
 <div class="row mb-3">
-  <div class="col-12">
+  <div class="col-12 mt-2">
     <a routerLink="/user/upsert" class="btn btn-success float-right">
       Add User &nbsp;<i class="fa fa-plus-circle"></i>
     </a>
@@ -16,7 +16,7 @@
         <li class="nav-item"><a (click)="listUsers()" class="nav-link active" href="#tab_1" data-toggle="tab">ALL</a>
         </li>
         <li class="nav-item" *ngFor="let item of itemList">
-          <a (click)="getItemValue(item.value)" class="nav-link" href="#tab_1" data-toggle="tab">{{item.key}}</a>
+          <a (click)="getItemValue(item.value)" class="nav-link" href="#tab_1" data-toggle="tab">{{ item.key }}</a>
         </li>
 
         <li class="nav-item dropdown">
@@ -41,32 +41,32 @@
             <div class="card-body pt-0">
               <div class="row">
                 <div class="col-7">
-                  <h2 class="lead"><b>{{u.userFirstName}} &nbsp; {{u.userLastName}}</b></h2>
+                  <h2 class="lead"><b>{{ u.userFirstName }} &nbsp; {{ u.userLastName }}</b></h2>
                   <ul class="ml-4 mb-0 fa-ul text-muted">
                     <li class="small">
-                      <span class="fa-li"><i class="fas fa-phone"></i></span> Phone : {{u.phone}}
+                      <span class="fa-li"><i class="fas fa-phone"></i></span> Phone : {{ u.phone }}
                     </li>
                     <li class="small mt-2">
-                      <span class="fa-li"><i class="fas fa-address-card"></i></span> address : {{u.address}}
+                      <span class="fa-li"><i class="fas fa-address-card"></i></span> address : {{ u.address }}
                     </li>
                     <li class="small mt-2">
                       <span class="fa-li"><i class="fas fa-user-shield"></i></span> User Role :
                       <div class="row">
                         <div *ngFor="let r of u.roles" class="col">
                                               <span *ngIf="r.roleName == 'ROLE_ADMIN'" class="badge badge-success">
-                                                {{r.roleDescription}}
+                                                {{ r.roleDescription }}
                                               </span>
                           <span *ngIf="r.roleName == 'ROLE_CEO'" class="badge badge-info">
-                                                {{r.roleDescription}}
+                                                {{ r.roleDescription }}
                                               </span>
                           <span *ngIf="r.roleName == 'ROLE_FUNDER'" class="badge badge-warning">
-                                                {{r.roleDescription}}
+                                                {{ r.roleDescription }}
                                               </span>
                           <span *ngIf="r.roleName == 'ROLE_WORKER'" class="badge badge-secondary">
-                                                {{r.roleDescription}}
+                                                {{ r.roleDescription }}
                                               </span>
                           <span *ngIf="r.roleName == 'ROLE_SG'" class="badge badge-primary">
-                                                {{r.roleDescription}}
+                                                {{ r.roleDescription }}
                                               </span>
                         </div>
                       </div>

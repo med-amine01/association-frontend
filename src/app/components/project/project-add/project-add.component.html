@@ -18,8 +18,8 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputName">Project Name</label>
-                <input  formControlName="inputName" type="text" id="inputName"
-                        [ngClass]="inputNameValid() ? 'form-control is-invalid' : 'form-control'">
+                <input formControlName="inputName" type="text" id="inputName"
+                       [ngClass]="inputNameValid() ? 'form-control is-invalid' : 'form-control'">
                 <!-- ERROR LIST-->
                 <!-- <div *ngIf="projectNameInput?.invalid && (projectNameInput?.dirty || projectNameInput?.touched)">
                 <small *ngIf="projectNameInput?.errors?.['required']" class="text-danger">
@@ -30,7 +30,7 @@
               <div class="form-group">
                 <label for="inputStatus">Status</label>
                 <select formControlName="inputStatus" id="inputStatus"
-                  [ngClass]="inputStatusValid() ? 'form-control is-invalid' : 'form-control custom-select'">
+                        [ngClass]="inputStatusValid() ? 'form-control is-invalid' : 'form-control custom-select'">
                   <option selected disabled>Select one</option>
                   <option>On Hold</option>
                   <option>Canceled</option>
@@ -40,7 +40,7 @@
               <div class="form-group">
                 <label for="inputProjectLeader">Project Leader</label>
                 <input formControlName="inputProjectLeader" type="text" id="inputProjectLeader"
-                [ngClass]="inputProjectLeaderValid() ? 'form-control is-invalid' : 'form-control'">
+                       [ngClass]="inputProjectLeaderValid() ? 'form-control is-invalid' : 'form-control'">
               </div>
               <div class="form-group">
                 <label for="inputDescription">Project Description</label>
@@ -67,17 +67,17 @@
               <div class="form-group">
                 <label for="inputEstimatedBudget">Estimated budget</label>
                 <input formControlName="inputEstimatedBudget" type="number" id="inputEstimatedBudget"
-                [ngClass]="inputEstimatedBudgetValid() ? 'form-control is-invalid' : 'form-control'">
+                       [ngClass]="inputEstimatedBudgetValid() ? 'form-control is-invalid' : 'form-control'">
               </div>
               <div class="form-group">
                 <label for="inputSpentBudget">Total amount spent</label>
                 <input formControlName="inputSpentBudget" type="number" id="inputSpentBudget" class="form-control"
-                [ngClass]="inputSpentBudgetValid() ? 'form-control is-invalid' : 'form-control'">
+                       [ngClass]="inputSpentBudgetValid() ? 'form-control is-invalid' : 'form-control'">
               </div>
               <div class="form-group">
                 <label for="inputEstimatedDuration">Estimated project duration</label>
                 <input formControlName="inputEstimatedDuration" type="number" id="inputEstimatedDuration"
-                [ngClass]="inputEstimatedDurationValid() ? 'form-control is-invalid' : 'form-control'">
+                       [ngClass]="inputEstimatedDurationValid() ? 'form-control is-invalid' : 'form-control'">
               </div>
             </div>
             <!-- /.card-body -->
@@ -89,7 +89,7 @@
 
     <div class="row">
       <div class="col-12">
-        <button type="submit" class="btn btn-success float-right">{{btnValue}}</button>
+        <button type="submit" class="btn btn-success float-right">{{ btnValue }}</button>
       </div>
     </div>
   </form>

@@ -9,22 +9,22 @@ import {UserService} from '../services/user.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private userAuthService : UserAuthService, private router : Router, private userService : UserService)
-  {}
+  constructor(private userAuthService: UserAuthService, private router: Router, private userService: UserService) {
+  }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     //return true;
-    if(this.userAuthService.getToken() !== null){
+    if (this.userAuthService.getToken() !== null) {
       //this route.data will be fetched from route in app.modules.ts
       const role = route.data["roles"] as Array<string>;
-      if(role){
+      if (role) {
         const match = this.userService.roleMatch(role);
 
-        if(match){
+        if (match) {
           return true;
-        }
-        else{
+        } else {
           this.router.navigate(['/forbidden']);
           return false;
         }

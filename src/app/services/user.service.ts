@@ -3,14 +3,14 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from '../common/user';
 import {UserAuthService} from './user-auth.service';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  PATH_OF_API = "http://localhost:8090";
-  USER_API_URL = "http://localhost:8090/api/user";
+  private readonly USER_API_URL: string = environment.API_BASE_URL + '/api/user';
 
   requestHeader = new HttpHeaders({
     "No-Auth": "True"
@@ -19,18 +19,20 @@ export class UserService {
   constructor(
     private httpClient: HttpClient,
     private userAuthService: UserAuthService
-  ) { }
+  ) {
+  }
 
 
-  getUserByAccountId(accountId : number): Observable<User> {
+  getUserByAccountId(accountId: number): Observable<User> {
     return this.httpClient.get<User>(this.USER_API_URL + "/account/" + accountId);
   }
+
   addUser(user: User): Observable<any> {
     return this.httpClient.post<User>(this.USER_API_URL + "/addUser", user);
   }
 
-  updateUser(user: User, email : string) {
-    return this.httpClient.patch<User>(this.USER_API_URL + "/update/"+email, user);
+  updateUser(user: User, email: string) {
+    return this.httpClient.patch<User>(this.USER_API_URL + "/update/" + email, user);
   }
 
   disableUser(uid: string) {
@@ -38,15 +40,16 @@ export class UserService {
   }
 
   enableUser(uid: string) {
-    return this.httpClient.patch<User>(this.USER_API_URL + "/enable/" + uid,null);
+    return this.httpClient.patch<User>(this.USER_API_URL + "/enable/" + uid, null);
   }
 
-  getUserByCriteria(role : string, active : boolean): Observable<User[]> {
-    if(active) {
-      return this.httpClient.get<any>(this.USER_API_URL + "/getBy/"+role+"/"+"1");
+  getUserByCriteria(role: string, active: boolean): Observable<User[]> {
+    if (active) {
+      return this.httpClient.get<any>(this.USER_API_URL + "/getBy/" + role + "/" + "1");
     }
-    return this.httpClient.get<any>(this.USER_API_URL + "/getBy/"+role+"/"+"0");
+    return this.httpClient.get<any>(this.USER_API_URL + "/getBy/" + role + "/" + "0");
   }
+
   getAllUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.USER_API_URL + "/getall");
   }
@@ -54,15 +57,15 @@ export class UserService {
   getUser(id: string): Observable<User> {
     return this.httpClient.get<User>(this.USER_API_URL + "/" + id);
   }
+
   public login(loginData: any) {
-    return this.httpClient.post(this.PATH_OF_API + "/authenticate", loginData, { headers: this.requestHeader });
+    return this.httpClient.post(environment.API_BASE_URL + "/authenticate", loginData, {headers: this.requestHeader});
   }
 
   //@ts-ignore
   public roleMatch(allowedRoles: any): boolean {
     let isMatch = false;
     const userRoles: any = this.userAuthService.getRoles();
-
     if (userRoles != null && userRoles) {
       for (let i = 0; i < userRoles.length; i++) {
         for (let j = 0; j < allowedRoles.length; j++) {
@@ -77,9 +80,8 @@ export class UserService {
   }
 }
 
-interface GetPatients
-{
-  _embedded:{
+interface GetPatients {
+  _embedded: {
     users: User[];
   }
 }

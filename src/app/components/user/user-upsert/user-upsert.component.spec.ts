@@ -8,9 +8,9 @@ describe('UserUpsertComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserUpsertComponent ]
+      declarations: [UserUpsertComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(UserUpsertComponent);
     component = fixture.componentInstance;

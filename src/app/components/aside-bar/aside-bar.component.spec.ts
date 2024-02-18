@@ -8,9 +8,9 @@ describe('AsideBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AsideBarComponent ]
+      declarations: [AsideBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AsideBarComponent);
     component = fixture.componentInstance;

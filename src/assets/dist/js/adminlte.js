@@ -5,11 +5,14 @@
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'jquery'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.adminlte = {}, global.jQuery));
-})(this, (function (exports, $) { 'use strict';
+    typeof define === 'function' && define.amd ? define(['exports', 'jquery'], factory) :
+      (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.adminlte = {}, global.jQuery));
+})(this, (function (exports, $) {
+  'use strict';
 
-  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+  function _interopDefaultLegacy(e) {
+    return e && typeof e === 'object' && 'default' in e ? e : {'default': e};
+  }
 
   var $__default = /*#__PURE__*/_interopDefaultLegacy($);
 
@@ -46,11 +49,13 @@
     responseType: '',
     overlayTemplate: '<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>',
     errorTemplate: '<span class="text-danger"></span>',
-    onLoadStart: function onLoadStart() {},
+    onLoadStart: function onLoadStart() {
+    },
     onLoadDone: function onLoadDone(response) {
       return response;
     },
-    onLoadFail: function onLoadFail(_jqXHR, _textStatus, _errorThrown) {}
+    onLoadFail: function onLoadFail(_jqXHR, _textStatus, _errorThrown) {
+    }
   };
 
   var CardRefresh = /*#__PURE__*/function () {
@@ -948,9 +953,9 @@
    * --------------------------------------------
    */
   /**
-    * Constants
-    * ====================================================
-    */
+   * Constants
+   * ====================================================
+   */
 
   var NAME$9 = 'ExpandableTable';
   var DATA_KEY$9 = 'lte.expandableTable';
@@ -963,9 +968,9 @@
   var SELECTOR_DATA_TOGGLE$2 = '[data-widget="expandable-table"]';
   var SELECTOR_ARIA_ATTR = 'aria-expanded';
   /**
-    * Class Definition
-    * ====================================================
-    */
+   * Class Definition
+   * ====================================================
+   */
 
   var ExpandableTable = /*#__PURE__*/function () {
     function ExpandableTable(element, options) {
@@ -1039,9 +1044,9 @@
     return ExpandableTable;
   }();
   /**
-    * Data API
-    * ====================================================
-    */
+   * Data API
+   * ====================================================
+   */
 
 
   $__default["default"](SELECTOR_TABLE).ready(function () {
@@ -1051,9 +1056,9 @@
     ExpandableTable._jQueryInterface.call($__default["default"](this), 'toggleRow');
   });
   /**
-    * jQuery API
-    * ====================================================
-    */
+   * jQuery API
+   * ====================================================
+   */
 
   $__default["default"].fn[NAME$9] = ExpandableTable._jQueryInterface;
   $__default["default"].fn[NAME$9].Constructor = ExpandableTable;
@@ -1157,9 +1162,9 @@
     return Fullscreen;
   }();
   /**
-    * Data API
-    * ====================================================
-    */
+   * Data API
+   * ====================================================
+   */
 
 
   $__default["default"](document).on('click', SELECTOR_DATA_WIDGET$2, function () {
@@ -3063,7 +3068,7 @@
   exports.TodoList = TodoList;
   exports.Treeview = Treeview;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
+  Object.defineProperty(exports, '__esModule', {value: true});
 
 }));
 //# sourceMappingURL=adminlte.js.map

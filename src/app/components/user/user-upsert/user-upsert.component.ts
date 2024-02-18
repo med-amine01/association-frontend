@@ -18,7 +18,7 @@ export class UserUpsertComponent implements OnInit {
   roles: Role[] = [];
   converted: any[] = [];
   data: any[] = [];
-  selectedRoles: any[]=[];
+  selectedRoles: any[] = [];
 
   userFormGroup!: FormGroup;
   userToUpdate: User = new User();
@@ -32,7 +32,8 @@ export class UserUpsertComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -103,34 +104,60 @@ export class UserUpsertComponent implements OnInit {
     this.inputRole?.setValue(this.selectedRoles);
   }
 
-  get inputEmail() { return this.userFormGroup.get('userInfo.inputEmail'); }
-  get inputFirstName() { return this.userFormGroup.get('userInfo.inputFirstName'); }
-  get inputLastName() { return this.userFormGroup.get('userInfo.inputLastName'); }
-  get inputPassword() { return this.userFormGroup.get('userInfo.inputPassword'); }
-  get inputPhone() { return this.userFormGroup.get('userInfo.inputPhone'); }
-  get inputAddress() { return this.userFormGroup.get('userInfo.inputAddress'); }
-  get inputRole() { return this.userFormGroup.get('userInfo.inputRole'); }
+  get inputEmail() {
+    return this.userFormGroup.get('userInfo.inputEmail');
+  }
+
+  get inputFirstName() {
+    return this.userFormGroup.get('userInfo.inputFirstName');
+  }
+
+  get inputLastName() {
+    return this.userFormGroup.get('userInfo.inputLastName');
+  }
+
+  get inputPassword() {
+    return this.userFormGroup.get('userInfo.inputPassword');
+  }
+
+  get inputPhone() {
+    return this.userFormGroup.get('userInfo.inputPhone');
+  }
+
+  get inputAddress() {
+    return this.userFormGroup.get('userInfo.inputAddress');
+  }
+
+  get inputRole() {
+    return this.userFormGroup.get('userInfo.inputRole');
+  }
 
 
   //VALIDATORS
   inputEmailValid(): boolean {
     return this.inputEmail?.invalid && (this.inputEmail?.dirty || this.inputEmail?.touched) ? true : false;
   }
+
   inputFirstNameValid(): boolean {
     return this.inputFirstName?.invalid && (this.inputFirstName?.dirty || this.inputFirstName?.touched) ? true : false;
   }
+
   inputLastNameValid(): boolean {
     return this.inputLastName?.invalid && (this.inputLastName?.dirty || this.inputLastName?.touched) ? true : false;
   }
+
   inputPasswordValid(): boolean {
     return this.inputPassword?.invalid && (this.inputPassword?.dirty || this.inputPassword?.touched) ? true : false;
   }
+
   inputPhoneValid(): boolean {
     return this.inputPhone?.invalid && (this.inputPhone?.dirty || this.inputPhone?.touched) ? true : false;
   }
+
   inputAddressValid(): boolean {
     return this.inputAddress?.invalid && (this.inputAddress?.dirty || this.inputAddress?.touched) ? true : false;
   }
+
   inputRoleValid(): boolean {
     return this.inputRole?.invalid && (this.inputRole?.dirty || this.inputRole?.touched) ? true : false;
   }
@@ -148,8 +175,8 @@ export class UserUpsertComponent implements OnInit {
     u.roles = [];
     this.selectedRoles.forEach(element => {
       u.roles.push({
-        roleName : element,
-        roleDescription : ''
+        roleName: element,
+        roleDescription: ''
       })
     });
 
@@ -188,7 +215,7 @@ export class UserUpsertComponent implements OnInit {
 
   onSubmit() {
     if (this.userFormGroup.invalid) {
-      if(this.btnValue == 'Add User'){
+      if (this.btnValue == 'Add User') {
         this.userFormGroup.markAllAsTouched();
         this.toastr.warning("Please fill the form properly!");
         return;
@@ -203,6 +230,7 @@ export class UserUpsertComponent implements OnInit {
   change(key: string, event: Event) {
     //console.log("changing " + key, event);
   }
+
   search(text: string) {
     this.data = text
       ? (JSON.parse(JSON.stringify(this.data)) as Select2Option[]).filter(
@@ -210,6 +238,7 @@ export class UserUpsertComponent implements OnInit {
       )
       : JSON.parse(JSON.stringify(this.data));
   }
+
   update(key: string, event: Select2UpdateEvent<any>): any {
 
     //console.log(event.value);

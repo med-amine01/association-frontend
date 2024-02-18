@@ -18,19 +18,20 @@ import {ProjectService} from "../../../services/project.service";
 })
 export class ProjectDetailComponent {
   projectId !: number;
-  currentUser : User = new User();
-  currentBalance :number = 0;
+  currentUser: User = new User();
+  currentBalance: number = 0;
   balanceFromGroup!: FormGroup;
-  currentProject : Project = new Project();
+  currentProject: Project = new Project();
+
   constructor(private formBuilder: FormBuilder,
-              private userService : UserService,
-              private requestService : RequestService,
-              private userAuthService : UserAuthService,
+              private userService: UserService,
+              private requestService: RequestService,
+              private userAuthService: UserAuthService,
               private route: ActivatedRoute,
-              private router : Router,
-              private accountService : AccountService,
+              private router: Router,
+              private accountService: AccountService,
               private toastr: ToastrService,
-              private projectService : ProjectService) {
+              private projectService: ProjectService) {
   }
 
   ngOnInit(): void {
@@ -42,49 +43,59 @@ export class ProjectDetailComponent {
     });
   }
 
-  initProject(id : number) {
+  initProject(id: number) {
     this.projectService.getProject(id).subscribe(
       data => {
         this.currentProject = data;
       }
     );
   }
+
   formGroupInit() {
     this.balanceFromGroup = this.formBuilder.group({
-      balanceInfo : this.formBuilder.group({
-        inputBalance : new FormControl('', [Validators.required])
+      balanceInfo: this.formBuilder.group({
+        inputBalance: new FormControl('', [Validators.required])
       })
     })
   }
 
-  get inputBalance() { return this.balanceFromGroup.get('balanceInfo.inputBalance'); }
+  get inputBalance() {
+    return this.balanceFromGroup.get('balanceInfo.inputBalance');
+  }
+
   inputBalanceValide(): boolean {
     return this.inputBalance?.invalid && (this.inputBalance?.dirty || this.inputBalance?.touched) ? true : false;
   }
 
   getCurrentUser() {
-    const userUid = this.userAuthService.getUserUid();
-    // @ts-ignore
-    this.userService.getUser(userUid).subscribe(
-      data => {
-        this.currentUser = data;
-        this.currentBalance = data.account[0].currentBalance;
-      },
-      error => {
-        console.log(error.message());
-      }
-    );
+    let userUid: string | null = null; // Set initial value to null
+    const userUidFromService = this.userAuthService.getUserUid(); // Retrieve userUid from service
+    if (userUidFromService !== null) {
+      userUid = userUidFromService; // Assign value if not null
+    }
+    if (userUid !== null) {
+      this.userService.getUser(userUid).subscribe(
+        (data: User) => {
+          this.currentUser = data;
+          this.currentBalance = data.account[0].currentBalance;
+        },
+        error => {
+          console.log(error.message());
+        }
+      );
+    }
   }
+
   onSubmitBalance() {
     //check if it's empty
-    if(this.balanceFromGroup.invalid) {
+    if (this.balanceFromGroup.invalid) {
       this.balanceFromGroup.markAllAsTouched();
       this.toastr.warning("please enter an amount !");
       return;
     }
 
     //check if funder got enough money
-    if(this.inputBalance?.value > this.currentBalance) {
+    if (this.inputBalance?.value > this.currentBalance) {
       this.balanceFromGroup.markAllAsTouched();
       this.toastr.error("You don't have enough balance !");
       return;
@@ -107,7 +118,7 @@ export class ProjectDetailComponent {
       data => {
         this.toastr.success("YOUR REQUEST HAS BEEN ADDED SUCCEFULLY ");
         this.router.navigate(['/request']);
-        localStorage.setItem('reload','1');
+        localStorage.setItem('reload', '1');
       },
       error => {
         console.log(error.message);

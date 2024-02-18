@@ -43,7 +43,7 @@ export class UserAuthService {
     localStorage.clear();
   }
 
-  public isLoggedIn() : boolean {
+  public isLoggedIn(): boolean {
     return Boolean(this.getRoles() && this.getToken());
   }
 
@@ -84,7 +84,7 @@ export class UserAuthService {
     return false;
   }
 
-  isSgRole():boolean {
+  isSgRole(): boolean {
     for (const r of this.mapRolesFromLocalStorage()) {
       if (r.roleName === 'ROLE_SG') {
         return true;

@@ -9,24 +9,26 @@ import {PatientService} from 'src/app/services/patient.service';
   templateUrl: './patient-list.component.html',
   styleUrls: ['./patient-list.component.css']
 })
-export class PatientListComponent implements OnInit{
-  patients : Patient[] = [];
+export class PatientListComponent implements OnInit {
+  patients: Patient[] = [];
   id !: number;
+
   constructor(
-    private patientService : PatientService,
+    private patientService: PatientService,
     private toastr: ToastrService,
-    private location : Location
-  ){}
+    private location: Location
+  ) {
+  }
 
   ngOnInit(): void {
     this.listPatient();
   }
 
-  setIdForModel(id : number){
+  setIdForModel(id: number) {
     this.id = id;
   }
 
-  listPatient(){
+  listPatient() {
     this.patientService.getAllPatients().subscribe(
       data => {
         this.patients = data;
@@ -34,12 +36,12 @@ export class PatientListComponent implements OnInit{
     );
   }
 
-  deletePatient(){
+  deletePatient() {
     this.patientService.deletePatient(this.id).subscribe(
       data => {
-          this.toastr.success("Patient with ID = " + this.id + " Deleted Successfully");
-          this.location.go(this.location.path());
-          window.location.reload();
+        this.toastr.success("Patient with ID = " + this.id + " Deleted Successfully");
+        this.location.go(this.location.path());
+        window.location.reload();
       },
       error => {
         console.log(error.message());

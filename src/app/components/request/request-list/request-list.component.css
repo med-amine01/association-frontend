@@ -1,0 +1,8 @@
+.project-actions-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.project-actions-container .btn {
+  margin-right: 5px; /* Adjust as needed */
+}

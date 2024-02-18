@@ -1,254 +1,264 @@
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Projects Detail</h3>
+<div class="row">
+  <div class="col-12 mt-1">
+    <!-- Hidden button -->
+    <a routerLink="/patient/upsert" class="btn btn-success float-right" style="visibility: hidden;">
+      Add Patient &nbsp;<i class="fa fa-plus-circle"></i>
+    </a>
+  </div>
+</div>
+<!-- Default box -->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Projects Detail</h3>
 
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+        <div class="row">
+          <div class="col-12 col-sm-4">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">Estimated budget</span>
+                <span
+                  class="info-box-number text-center text-muted mb-0">{{ currentProject.estimatedBudget | currency }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">Total amount spent</span>
+                <span
+                  class="info-box-number text-center text-muted mb-0">{{ currentProject.totalAmountSpent | currency }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">Estimated project duration</span>
+                <span class="info-box-number text-center text-muted mb-0">{{ currentProject.duration }} months</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-              <div class="row">
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Estimated budget</span>
-                      <span class="info-box-number text-center text-muted mb-0">{{currentProject.estimatedBudget | currency}}</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Total amount spent</span>
-                      <span class="info-box-number text-center text-muted mb-0">{{currentProject.totalAmountSpent | currency}}</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Estimated project duration</span>
-                      <span class="info-box-number text-center text-muted mb-0">{{currentProject.duration}} months</span>
-                    </div>
-                  </div>
+        <div class="row">
+          <div class="col-12">
+            <h4>Recent Activity</h4>
+            <div class="post">
+              <div class="user-block">
+                <img class="img-circle img-bordered-sm" src="assets/dist/img/user1-128x128.jpg" alt="user image">
+                <span class="username">
+                          <a href="#">Jonathan Burke Jr.</a>
+                        </span>
+                <span class="description">Shared publicly - 7:45 PM today</span>
+              </div>
+              <!-- /.user-block -->
+              <p>
+                Lorem ipsum represents a long-held tradition for designers,
+                typographers and the like. Some people hate it and argue for
+                its demise, but others ignore.
+              </p>
+
+              <p>
+                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
+              </p>
+            </div>
+
+            <div class="post clearfix">
+              <div class="user-block">
+                <img class="img-circle img-bordered-sm" src="assets/dist/img/user7-128x128.jpg" alt="User Image">
+                <span class="username">
+                          <a href="#">Sarah Ross</a>
+                        </span>
+                <span class="description">Sent you a message - 3 days ago</span>
+              </div>
+              <!-- /.user-block -->
+              <p>
+                Lorem ipsum represents a long-held tradition for designers,
+                typographers and the like. Some people hate it and argue for
+                its demise, but others ignore.
+              </p>
+              <p>
+                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
+              </p>
+            </div>
+
+            <div class="post">
+              <div class="user-block">
+                <img class="img-circle img-bordered-sm" src="assets/dist/img/user1-128x128.jpg" alt="user image">
+                <span class="username">
+                          <a href="#">Jonathan Burke Jr.</a>
+                        </span>
+                <span class="description">Shared publicly - 5 days ago</span>
+              </div>
+              <!-- /.user-block -->
+              <p>
+                Lorem ipsum represents a long-held tradition for designers,
+                typographers and the like. Some people hate it and argue for
+                its demise, but others ignore.
+              </p>
+
+              <p>
+                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v1</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+        <div class="card card-secondary">
+          <div class="card-header">
+            <h3 class="card-title">FUND PROJECT</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="balanceFromGroup" (ngSubmit)="onSubmitBalance()">
+              <div formGroupName="balanceInfo">
+                <div class="form-group">
+                  <label for="inputEstimatedDuration">Enter Amount</label>
+                  <input type="number"
+                         placeholder="0.0$"
+                         id="inputEstimatedDuration"
+                         class="form-control"
+                         step="0.1"
+                         formControlName="inputBalance"
+                         [ngClass]="inputBalanceValide() ? 'form-control is-invalid' : 'form-control'">
                 </div>
               </div>
               <div class="row">
                 <div class="col-12">
-                  <h4>Recent Activity</h4>
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="assets/dist/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                        </span>
-                        <span class="description">Shared publicly - 7:45 PM today</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
-                      </p>
-
-                      <p>
-                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
-                      </p>
-                    </div>
-
-                    <div class="post clearfix">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="assets/dist/img/user7-128x128.jpg" alt="User Image">
-                        <span class="username">
-                          <a href="#">Sarah Ross</a>
-                        </span>
-                        <span class="description">Sent you a message - 3 days ago</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
-                      </p>
-                      <p>
-                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
-                      </p>
-                    </div>
-
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="assets/dist/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                        </span>
-                        <span class="description">Shared publicly - 5 days ago</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
-                      </p>
-
-                      <p>
-                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v1</a>
-                      </p>
-                    </div>
+                  <input type="submit" value="ADD REQUEST" class="btn btn-success float-right">
                 </div>
               </div>
-            </div>
-            <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-              <div class="card card-secondary">
-                <div class="card-header">
-                  <h3 class="card-title">FUND PROJECT</h3>
-
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <form [formGroup]="balanceFromGroup" (ngSubmit)="onSubmitBalance()">
-                    <div formGroupName="balanceInfo">
-                      <div class="form-group">
-                        <label for="inputEstimatedDuration">Enter Amount</label>
-                        <input type="number"
-                               placeholder="0.0$"
-                               id="inputEstimatedDuration"
-                               class="form-control"
-                               step="0.1"
-                               formControlName="inputBalance"
-                               [ngClass]="inputBalanceValide() ? 'form-control is-invalid' : 'form-control'">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-12">
-                        <input type="submit" value="ADD REQUEST" class="btn btn-success float-right">
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <!-- /.card-body -->
-              </div>
-
-<!--              <div class="card card-info">-->
-<!--                <div class="card-header">-->
-<!--                  <h3 class="card-title">Transactions</h3>-->
-
-<!--                  <div class="card-tools">-->
-<!--                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">-->
-<!--                      <i class="fas fa-minus"></i>-->
-<!--                    </button>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="card-body p-0">-->
-<!--                  <table class="table">-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                      <th>File Name</th>-->
-<!--                      <th>File Size</th>-->
-<!--                      <th></th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-
-<!--                    <tr>-->
-<!--                      <td>Functional-requirements.docx</td>-->
-<!--                      <td>49.8005 kb</td>-->
-<!--                      <td class="text-right py-0 align-middle">-->
-<!--                        <div class="btn-group btn-group-sm">-->
-<!--                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
-<!--                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
-<!--                        </div>-->
-<!--                      </td>-->
-<!--                    </tr><tr>-->
-<!--                      <td>UAT.pdf</td>-->
-<!--                      <td>28.4883 kb</td>-->
-<!--                      <td class="text-right py-0 align-middle">-->
-<!--                        <div class="btn-group btn-group-sm">-->
-<!--                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
-<!--                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
-<!--                        </div>-->
-<!--                      </td>-->
-<!--                    </tr><tr>-->
-<!--                      <td>Email-from-flatbal.mln</td>-->
-<!--                      <td>57.9003 kb</td>-->
-<!--                      <td class="text-right py-0 align-middle">-->
-<!--                        <div class="btn-group btn-group-sm">-->
-<!--                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
-<!--                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
-<!--                        </div>-->
-<!--                      </td>-->
-<!--                    </tr><tr>-->
-<!--                      <td>Logo.png</td>-->
-<!--                      <td>50.5190 kb</td>-->
-<!--                      <td class="text-right py-0 align-middle">-->
-<!--                        <div class="btn-group btn-group-sm">-->
-<!--                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
-<!--                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
-<!--                        </div>-->
-<!--                      </td>-->
-<!--                    </tr><tr>-->
-<!--                      <td>Contract-10_12_2014.docx</td>-->
-<!--                      <td>44.9715 kb</td>-->
-<!--                      <td class="text-right py-0 align-middle">-->
-<!--                        <div class="btn-group btn-group-sm">-->
-<!--                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
-<!--                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
-<!--                        </div>-->
-<!--                      </td>-->
-
-<!--                    </tr></tbody>-->
-<!--                  </table>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; /.card-body &ndash;&gt;-->
-<!--              </div>-->
-<!--              <h3 class="text-primary"><i class="fas fa-paint-brush"></i> AdminLTE v3</h3>-->
-<!--              <p class="text-muted">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</p>-->
-<!--              <br>-->
-<!--              <div class="text-muted">-->
-<!--                <p class="text-sm">Client Company-->
-<!--                  <b class="d-block">Deveint Inc</b>-->
-<!--                </p>-->
-<!--                <p class="text-sm">Project Leader-->
-<!--                  <b class="d-block">Tony Chicken</b>-->
-<!--                </p>-->
-<!--              </div>-->
-
-<!--              <h5 class="mt-5 text-muted">Project files</h5>-->
-<!--              <ul class="list-unstyled">-->
-<!--                <li>-->
-<!--                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-envelope"></i> Email-from-flatbal.mln</a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Logo.png</a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Contract-10_12_2014.docx</a>-->
-<!--                </li>-->
-<!--              </ul>-->
-<!--              <div class="text-center mt-5 mb-3">-->
-<!--                <a href="#" class="btn btn-sm btn-primary">Add files</a>-->
-<!--                <a href="#" class="btn btn-sm btn-warning">Report contact</a>-->
-<!--              </div>-->
-            </div>
+            </form>
           </div>
+          <!-- /.card-body -->
         </div>
-        <!-- /.card-body -->
+
+        <!--              <div class="card card-info">-->
+        <!--                <div class="card-header">-->
+        <!--                  <h3 class="card-title">Transactions</h3>-->
+
+        <!--                  <div class="card-tools">-->
+        <!--                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">-->
+        <!--                      <i class="fas fa-minus"></i>-->
+        <!--                    </button>-->
+        <!--                  </div>-->
+        <!--                </div>-->
+        <!--                <div class="card-body p-0">-->
+        <!--                  <table class="table">-->
+        <!--                    <thead>-->
+        <!--                    <tr>-->
+        <!--                      <th>File Name</th>-->
+        <!--                      <th>File Size</th>-->
+        <!--                      <th></th>-->
+        <!--                    </tr>-->
+        <!--                    </thead>-->
+        <!--                    <tbody>-->
+
+        <!--                    <tr>-->
+        <!--                      <td>Functional-requirements.docx</td>-->
+        <!--                      <td>49.8005 kb</td>-->
+        <!--                      <td class="text-right py-0 align-middle">-->
+        <!--                        <div class="btn-group btn-group-sm">-->
+        <!--                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
+        <!--                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
+        <!--                        </div>-->
+        <!--                      </td>-->
+        <!--                    </tr><tr>-->
+        <!--                      <td>UAT.pdf</td>-->
+        <!--                      <td>28.4883 kb</td>-->
+        <!--                      <td class="text-right py-0 align-middle">-->
+        <!--                        <div class="btn-group btn-group-sm">-->
+        <!--                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
+        <!--                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
+        <!--                        </div>-->
+        <!--                      </td>-->
+        <!--                    </tr><tr>-->
+        <!--                      <td>Email-from-flatbal.mln</td>-->
+        <!--                      <td>57.9003 kb</td>-->
+        <!--                      <td class="text-right py-0 align-middle">-->
+        <!--                        <div class="btn-group btn-group-sm">-->
+        <!--                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
+        <!--                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
+        <!--                        </div>-->
+        <!--                      </td>-->
+        <!--                    </tr><tr>-->
+        <!--                      <td>Logo.png</td>-->
+        <!--                      <td>50.5190 kb</td>-->
+        <!--                      <td class="text-right py-0 align-middle">-->
+        <!--                        <div class="btn-group btn-group-sm">-->
+        <!--                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
+        <!--                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
+        <!--                        </div>-->
+        <!--                      </td>-->
+        <!--                    </tr><tr>-->
+        <!--                      <td>Contract-10_12_2014.docx</td>-->
+        <!--                      <td>44.9715 kb</td>-->
+        <!--                      <td class="text-right py-0 align-middle">-->
+        <!--                        <div class="btn-group btn-group-sm">-->
+        <!--                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>-->
+        <!--                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>-->
+        <!--                        </div>-->
+        <!--                      </td>-->
+
+        <!--                    </tr></tbody>-->
+        <!--                  </table>-->
+        <!--                </div>-->
+        <!--                &lt;!&ndash; /.card-body &ndash;&gt;-->
+        <!--              </div>-->
+        <!--              <h3 class="text-primary"><i class="fas fa-paint-brush"></i> AdminLTE v3</h3>-->
+        <!--              <p class="text-muted">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</p>-->
+        <!--              <br>-->
+        <!--              <div class="text-muted">-->
+        <!--                <p class="text-sm">Client Company-->
+        <!--                  <b class="d-block">Deveint Inc</b>-->
+        <!--                </p>-->
+        <!--                <p class="text-sm">Project Leader-->
+        <!--                  <b class="d-block">Tony Chicken</b>-->
+        <!--                </p>-->
+        <!--              </div>-->
+
+        <!--              <h5 class="mt-5 text-muted">Project files</h5>-->
+        <!--              <ul class="list-unstyled">-->
+        <!--                <li>-->
+        <!--                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>-->
+        <!--                </li>-->
+        <!--                <li>-->
+        <!--                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>-->
+        <!--                </li>-->
+        <!--                <li>-->
+        <!--                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-envelope"></i> Email-from-flatbal.mln</a>-->
+        <!--                </li>-->
+        <!--                <li>-->
+        <!--                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Logo.png</a>-->
+        <!--                </li>-->
+        <!--                <li>-->
+        <!--                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Contract-10_12_2014.docx</a>-->
+        <!--                </li>-->
+        <!--              </ul>-->
+        <!--              <div class="text-center mt-5 mb-3">-->
+        <!--                <a href="#" class="btn btn-sm btn-primary">Add files</a>-->
+        <!--                <a href="#" class="btn btn-sm btn-warning">Report contact</a>-->
+        <!--              </div>-->
       </div>
-      <!-- /.card -->
+    </div>
+  </div>
+  <!-- /.card-body -->
+</div>
+<!-- /.card -->

@@ -7,9 +7,10 @@ import {AccountService} from "../../../services/account.service";
   templateUrl: './account-list.component.html',
   styleUrls: ['./account-list.component.css']
 })
-export class AccountListComponent implements OnInit{
-  accounts : Account [] = [];
-  constructor(private accountService : AccountService) {
+export class AccountListComponent implements OnInit {
+  accounts: Account [] = [];
+
+  constructor(private accountService: AccountService) {
   }
 
   ngOnInit(): void {

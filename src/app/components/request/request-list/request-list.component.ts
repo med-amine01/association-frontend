@@ -11,100 +11,96 @@ import {UserService} from 'src/app/services/user.service';
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.css']
 })
-export class RequestListComponent implements OnInit{
+export class RequestListComponent implements OnInit {
 
-  requests : Request[] = [];
+  requests: Request[] = [];
   id !: number;
-  constructor(private requestService : RequestService,
-              private toastr : ToastrService,
-              private location : Location,
-              private userauth:UserAuthService,
-              private userService:UserService) {
+
+  constructor(private requestService: RequestService,
+              private toastr: ToastrService,
+              private location: Location,
+              private userauth: UserAuthService,
+              private userService: UserService) {
   }
+
   ngOnInit(): void {
     this.listRequests();
   }
 
-  listRequests(){
-    if(this.userauth.isFunderRole()) {
+  listRequests() {
+    if (this.userauth.isFunderRole()) {
       let uid = this.userauth.getUserUid();
-      if(localStorage.getItem('reload') == '1') {
+      if (localStorage.getItem('reload') == '1') {
         window.location.reload();
-        localStorage.setItem('reload' , '0');
+        localStorage.setItem('reload', '0');
       }
       // @ts-ignore
       this.requestService.getRequestsByUid(uid).subscribe(
-        data =>{
+        data => {
           this.requests = data;
         }
       );
     }
-    if(this.userauth.isSgRole()){
-      this.requestService.getRequestByStatus("ACCEPTED_TO_SG").subscribe(
-        data =>{
-          this.requests = data;
-        }
-      );
-    }
-    else if(this.userauth.isAdminRole()){
-      this.requestService.getRequestByStatus("REVIEW").subscribe(
-        data =>{
-          this.requests = data;
-        }
-      );
-    }
-    else if(this.userauth.isWorkerRole()){
-      this.requestService.getRequestByStatus("REVIEW").subscribe(
-        data =>{
-          this.requests = data;
-        }
-      );
+    if (this.userauth.isSgRole()) {
+      this.getRequest("ACCEPTED_TO_SG");
+    } else if (this.userauth.isAdminRole()) {
+      this.getRequest("REVIEW");
+    } else if (this.userauth.isWorkerRole()) {
+      this.getRequest("REVIEW");
     }
 
   }
 
-  deleteRequest(){
+  getRequest(status: string): void {
+    this.requestService.getRequestByStatus(status).subscribe(
+      data => {
+        this.requests = data;
+      }
+    );
+  }
+
+  deleteRequest() {
     this.requestService.deleteRequest(this.id).subscribe(
       data => {
         this.toastr.success("Request with ID = " + this.id + " Deleted Successfully");
         this.location.go(this.location.path());
         window.location.reload();
       },
-      error =>{
+      error => {
         console.log(error.message());
       }
     );
   }
 
-  setIdForModel(id : number){
+  setIdForModel(id: number) {
     this.id = id;
   }
-  accepReq(request:Request){
-    if(this.userauth.isSgRole()){
-      request.requestStatus="ACCEPTED_SG"
+
+  accepReq(request: Request) {
+    if (this.userauth.isSgRole()) {
+      request.requestStatus = "ACCEPTED_SG"
       this.requestService.updateRequest(request).subscribe(
-        data =>{
+        data => {
           this.toastr.success("Request Accepted")
           console.log("ACCEPTED_SG")
-               }
+        }
       );
-    }
-    else if(this.userauth.isAdminRole()){
-      if(request.requestedAmount>100){
-        request.requestStatus="ACCEPTED_TO_SG"
-      }
-      else{
-        request.requestStatus="ACCEPTED_ADMIN"
+    } else if (this.userauth.isAdminRole()) {
+      if (request.requestedAmount > 100) {
+        request.requestStatus = "ACCEPTED_TO_SG"
+      } else {
+        request.requestStatus = "ACCEPTED_ADMIN"
       }
       this.requestService.updateRequest(request).subscribe(
-        data =>{
+        data => {
           this.toastr.success("Request Accepted")
-            }
+        }
       );
     }
     location.reload()
   }
-  roleMatching(role : any){
+
+  roleMatching(role: any) {
     //console.log("matching = " + this.userService.roleMatch(role));
     return this.userService.roleMatch(role);
   }

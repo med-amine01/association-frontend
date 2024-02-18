@@ -23,7 +23,8 @@ export class ProjectAddComponent {
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -60,6 +61,7 @@ export class ProjectAddComponent {
       })
     });
   }
+
   settingFields(p: Project) {
     this.inputName?.setValue(p.projectName);
     this.inputDescription?.setValue(p.projectDescription);
@@ -69,31 +71,57 @@ export class ProjectAddComponent {
     this.inputSpentBudget?.setValue(p.totalAmountSpent);
     this.inputEstimatedDuration?.setValue(p.duration);
   }
+
   //GETTERS
-  get inputName() { return this.projectFromGroup.get('projectInfo.inputName'); }
-  get inputDescription() { return this.projectFromGroup.get('projectInfo.inputDescription'); }
-  get inputStatus() { return this.projectFromGroup.get('projectInfo.inputStatus'); }
-  get inputProjectLeader() { return this.projectFromGroup.get('projectInfo.inputProjectLeader'); }
-  get inputEstimatedBudget() { return this.projectFromGroup.get('projectInfo.inputEstimatedBudget'); }
-  get inputSpentBudget() { return this.projectFromGroup.get('projectInfo.inputSpentBudget'); }
-  get inputEstimatedDuration() { return this.projectFromGroup.get('projectInfo.inputEstimatedDuration'); }
+  get inputName() {
+    return this.projectFromGroup.get('projectInfo.inputName');
+  }
+
+  get inputDescription() {
+    return this.projectFromGroup.get('projectInfo.inputDescription');
+  }
+
+  get inputStatus() {
+    return this.projectFromGroup.get('projectInfo.inputStatus');
+  }
+
+  get inputProjectLeader() {
+    return this.projectFromGroup.get('projectInfo.inputProjectLeader');
+  }
+
+  get inputEstimatedBudget() {
+    return this.projectFromGroup.get('projectInfo.inputEstimatedBudget');
+  }
+
+  get inputSpentBudget() {
+    return this.projectFromGroup.get('projectInfo.inputSpentBudget');
+  }
+
+  get inputEstimatedDuration() {
+    return this.projectFromGroup.get('projectInfo.inputEstimatedDuration');
+  }
 
   //VALIDATORS
   inputNameValid(): boolean {
     return this.inputName?.invalid && (this.inputName?.dirty || this.inputName?.touched) ? true : false;
   }
+
   inputStatusValid(): boolean {
     return this.inputStatus?.invalid && (this.inputStatus?.dirty || this.inputStatus?.touched) ? true : false;
   }
+
   inputProjectLeaderValid(): boolean {
     return this.inputProjectLeader?.invalid && (this.inputProjectLeader?.dirty || this.inputProjectLeader?.touched) ? true : false;
   }
+
   inputEstimatedBudgetValid(): boolean {
     return this.inputEstimatedBudget?.invalid && (this.inputEstimatedBudget?.dirty || this.inputEstimatedBudget?.touched) ? true : false;
   }
+
   inputSpentBudgetValid(): boolean {
     return this.inputSpentBudget?.invalid && (this.inputSpentBudget?.dirty || this.inputSpentBudget?.touched) ? true : false;
   }
+
   inputEstimatedDurationValid(): boolean {
     return this.inputEstimatedDuration?.invalid && (this.inputEstimatedDuration?.dirty || this.inputEstimatedDuration?.touched) ? true : false;
   }

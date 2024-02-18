@@ -1,9 +1,17 @@
 <!-- Main content -->
+<div class="row">
+  <div class="col-12 mt-1">
+    <!-- Hidden button -->
+    <a routerLink="/patient/upsert" class="btn btn-success float-right" style="visibility: hidden;">
+      Add Patient &nbsp;<i class="fa fa-plus-circle"></i>
+    </a>
+  </div>
+</div>
 <section class="content">
   <div class="row">
-<!--    <div *ngIf="!isFunder">-->
-<!--      -->
-<!--    </div>-->
+    <!--    <div *ngIf="!isFunder">-->
+    <!--      -->
+    <!--    </div>-->
     <div *ngIf="!isFunder" class="col-md-6">
       <div class="row">
         <div class="card card-primary d-flex flex-fill">
@@ -18,20 +26,20 @@
           <div class="card-body">
             <div class="row">
               <div class="col-7">
-                <h2 class="lead"><b>{{user.userFirstName}} {{user.userLastName}}</b></h2>
+                <h2 class="lead"><b>{{ user.userFirstName }} {{ user.userLastName }}</b></h2>
                 <ul class="ml-4 mb-0 fa-ul text-muted">
                   <li class="small mt-3">
-                    <span class="fa-li"><i class="fas fa-phone"></i></span> Phone : {{user.phone}}
+                    <span class="fa-li"><i class="fas fa-phone"></i></span> Phone : {{ user.phone }}
                   </li>
                   <li class="small mt-3">
-                    <span class="fa-li"><i class="fas fa-address-card"></i></span> address : {{user.address}}
+                    <span class="fa-li"><i class="fas fa-address-card"></i></span> address : {{ user.address }}
                   </li>
                   <li class="small mt-3">
                     <span class="fa-li"><i class="fas fa-user-shield"></i></span> User Role :
                     <div class="row">
                       <div *ngFor="let r of user.roles" class="col">
                         <span *ngIf="r.roleName == 'ROLE_FUNDER'" class="badge badge-warning">
-                          {{r.roleDescription}}
+                          {{ r.roleDescription }}
                         </span>
                       </div>
                     </div>
@@ -73,7 +81,10 @@
             <div formGroupName="balanceInfo">
               <div class="form-group">
                 <label for="inputSpentBudget">Current Balance</label>
-                <input type="text" [disabled]="true" id="inputSpentBudget" class="form-control" value="{{user.account[0].totalBalance | currency}}" step="1">
+                <input type="text" [disabled]="true" id="inputSpentBudget" class="form-control"
+                       value="{{ (user.account && user.account.length > 0) ? ((user.account[0].currentBalance || 0) | currency): 0 | currency}}"
+                       step="1">
+
               </div>
               <div class="form-group">
                 <label for="inputEstimatedDuration">Add Balance</label>
@@ -99,7 +110,7 @@
       <!-- /.card -->
       <div class="card card-info">
         <div class="card-header">
-          <h3 class="card-title">Files</h3>
+          <h3 class="card-title">Transactions history</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -119,15 +130,18 @@
             <tbody>
             <tr *ngFor="let trans of accountTransactions">
               <td>
-                <a [ngStyle]="{'color': trans.transactionType === 'DEPOSIT' ? '#8bc34a' : trans.transactionType === 'WITHDRAWAL' ? '#f44336' : ''}">
-                  <b>{{trans.transactionType}}</b>
+                <a
+                  [ngStyle]="{'color': trans.transactionType === 'DEPOSIT' ? '#8bc34a' : trans.transactionType === 'WITHDRAWAL' ? '#f44336' : ''}">
+                  <b>{{ trans.transactionType }}</b>
                 </a>
-                <br />
+                <br/>
                 <small>
-                  Created &nbsp;{{trans.transactionDate}}
+                  Created &nbsp;{{ trans.transactionDate }}
                 </small>
               </td>
-              <td [ngStyle]="{'color': trans.transactionType === 'DEPOSIT' ? '#8bc34a' : trans.transactionType === 'WITHDRAWAL' ? '#f44336' : ''}"><b>{{trans.amount | currency}}</b></td>
+              <td
+                [ngStyle]="{'color': trans.transactionType === 'DEPOSIT' ? '#8bc34a' : trans.transactionType === 'WITHDRAWAL' ? '#f44336' : ''}">
+                <b>{{ trans.amount | currency }}</b></td>
               <td class="text-right py-0 align-middle">
                 <div class="btn-group btn-group-sm">
                   <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>

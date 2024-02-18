@@ -1,4 +1,4 @@
 export class Role {
-    roleName !: string;
-    roleDescription !: string;
+  roleName !: string;
+  roleDescription !: string;
 }

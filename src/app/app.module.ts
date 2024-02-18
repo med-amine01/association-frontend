@@ -34,47 +34,94 @@ import {AccountListComponent} from './components/account/account-list/account-li
 import {AccountManagerComponent} from './components/account/account-manager/account-manager.component';
 import {CaisseComponent} from './components/caisse/caisse.component';
 import {HomeComponent} from './components/home/home.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
 
 
 const routes: Routes = [
 
-  { path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
 
   //ACCOUNT
-  { path: 'account', component: AccountListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'account/manager/:accountId', component: AccountManagerComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN', 'ROLE_FUNDER']} },
-  { path: 'caisse', component: CaisseComponent , canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']}},
+  {path: 'account', component: AccountListComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ADMIN']}},
+  {
+    path: 'account/manager/:accountId',
+    component: AccountManagerComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN', 'ROLE_FUNDER']}
+  },
+  {path: 'caisse', component: CaisseComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ADMIN']}},
 
 
   //REQUEST
 
-  { path: 'request', component: RequestListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG','ROLE_WORKER', 'ROLE_FUNDER']} },
-  { path: 'request/upsert/:id', component: RequestUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG','ROLE_WORKER']} },
-  { path: 'request/upsert', component: RequestUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG','ROLE_WORKER']} },
+  {
+    path: 'request',
+    component: RequestListComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN', 'ROLE_SG', 'ROLE_WORKER', 'ROLE_FUNDER']}
+  },
+  {
+    path: 'request/upsert/:id',
+    component: RequestUpsertComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN', 'ROLE_SG', 'ROLE_WORKER']}
+  },
+  {
+    path: 'request/upsert',
+    component: RequestUpsertComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN', 'ROLE_SG', 'ROLE_WORKER']}
+  },
 
 
   //PATIENT
-  { path: 'patient/upsert/:id', component: PatientUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'patient/upsert', component: PatientUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'patient', component: PatientListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  {
+    path: 'patient/upsert/:id',
+    component: PatientUpsertComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN']}
+  },
+  {path: 'patient/upsert', component: PatientUpsertComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ADMIN']}},
+  {path: 'patient', component: PatientListComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ADMIN']}},
 
   //PROJECT
-  { path: 'project/upsert', component: ProjectAddComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG']} },
-  { path: 'project/upsert/:id', component: ProjectAddComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN','ROLE_SG']} },
-  { path: 'project/detail/:id', component: ProjectDetailComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN', 'ROLE_FUNDER','ROLE_SG']} },
-  { path: 'project', component: ProjectListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN', 'ROLE_FUNDER','ROLE_SG']} },
+  {
+    path: 'project/upsert',
+    component: ProjectAddComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN', 'ROLE_SG']}
+  },
+  {
+    path: 'project/upsert/:id',
+    component: ProjectAddComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN', 'ROLE_SG']}
+  },
+  {
+    path: 'project/detail/:id',
+    component: ProjectDetailComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN', 'ROLE_FUNDER', 'ROLE_SG']}
+  },
+  {
+    path: 'project',
+    component: ProjectListComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['ROLE_ADMIN', 'ROLE_FUNDER', 'ROLE_SG']}
+  },
 
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'forbidden', component: ForbiddenComponent },
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'forbidden', component: ForbiddenComponent},
+  {path: '404', component: NotFoundComponent},
 
   //USER
-  { path: 'user/upsert', component: UserUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'user/upsert/:id', component: UserUpsertComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
-  { path: 'user', component: UserListComponent, canActivate : [AuthGuard], data : {roles:['ROLE_ADMIN']} },
+  {path: 'user/upsert', component: UserUpsertComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ADMIN']}},
+  {path: 'user/upsert/:id', component: UserUpsertComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ADMIN']}},
+  {path: 'user', component: UserListComponent, canActivate: [AuthGuard], data: {roles: ['ROLE_ADMIN']}},
 
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' } //** else of all routes (we can add 404 not found component
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '**', redirectTo: '404', pathMatch: 'full'} //** else of all routes (we can add 404 not found component
 ]
 
 
@@ -100,7 +147,8 @@ const routes: Routes = [
     AccountListComponent,
     AccountManagerComponent,
     CaisseComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent,
   ],
 
   imports: [
@@ -123,9 +171,9 @@ const routes: Routes = [
     AuthGuard,
     {
       //interceptor : interceptor will take token from localstorage(in our case) and put it inside header
-      provide : HTTP_INTERCEPTORS,
-      useClass : AuthInterceptor,
-      multi : true
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     },
     //this is the service that we want to apply our interceptor
     UserService
